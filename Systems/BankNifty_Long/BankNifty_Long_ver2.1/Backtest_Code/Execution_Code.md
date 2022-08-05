@@ -1,3 +1,4 @@
+## EXECUTION CODE
     ///BNL V.2.1.: This version will take Banknifty Index as an Entry Indicator and not the premium////
     //// This version will run only on Same Expiry Symbols: So will have to choose the Same Expiry WL with fewer Symbols//
 
