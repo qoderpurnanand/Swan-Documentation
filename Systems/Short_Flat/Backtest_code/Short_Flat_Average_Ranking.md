@@ -1,3 +1,4 @@
+## SHORT FLAT AVERAGE RANKING
     #include <Includeok.afl>
     #include <Banlist.afl>
     afl = "ShortflatAvgranking";
