@@ -1,3 +1,4 @@
+## CUSTOM BACKTESTER CODE
     SetCustomBacktestProc("");
 
     if( Status( "action" ) == actionPortfolio )
