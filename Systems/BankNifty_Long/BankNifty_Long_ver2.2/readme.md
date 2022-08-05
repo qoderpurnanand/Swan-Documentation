@@ -1,4 +1,5 @@
-BANKNIFTY LONG:
+# BANKNIFTY LONG:
+
 BankNifty Long system is an options trading strategy that buys Calls/Put Options as based on two Indicators:
 1.	Option Premium as an Indicator or
 2.	BankNifty Index as an Indicator
