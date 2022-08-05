@@ -1,3 +1,4 @@
+## STRIKE SELECTOR CODE
     TimeFrameSet(inDaily);
     #include <ExpiryDates.afl>  
     OptionExpiryDate = DateTimeConvert(2,WeeklyExpiryDate);
