@@ -1,3 +1,4 @@
+## SHORT INTRADAY AVERAGE RANKING CODE
     afl = "ShortAvgRanking2";
     maxpos = 15;
 
