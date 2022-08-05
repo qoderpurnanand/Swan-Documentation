@@ -1,3 +1,4 @@
+## STRIKE SELECTOR CODE
     //the strike selection code can be used to take ATM/ITM/OTM options as per choice
     //The Expirydates code can be taken from the Include folder
     TimeFrameSet(inDaily);
