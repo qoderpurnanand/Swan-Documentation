@@ -7,8 +7,11 @@ This version will take BankNifty Index as an Entry Indicator and not the premium
 
 ## BankNifty Long Version.1.2
 **Entry Signals:** Based on Move in BankNifty
+
 **Exit Signals:** Next Day Morning Optimized Time
+
 **Position Sizing:** % of Equity: Between 1-4% of Equity Based on Capacity
+
 **Expiry Symbol:** Trading all Same Expiries
 
 This version will take Banknifty Index as an Entry Criteria and not the premium. So for example if the Index moves 1% then buy the ATM Option.
