@@ -12,3 +12,4 @@ DB Name: BankNifty (Weekly Continuous Contracts)<br/>
 Watchlist: For this version of system, All Symbols DHF
 
 ### Database and Backtest Settings:
+Link to DB - \\Imac2\f\All Databases\Options (Updated as of 30062022)\Index Options\Excel\WeeklyFinNiftyWithTicker
