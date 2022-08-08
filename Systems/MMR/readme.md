@@ -15,3 +15,16 @@ Exit Signals: time = 093000 and day = 1st day of the next month<br/>
 Expiry Symbol: Trading all Next Expiries<br/>
 The avg CAR from 1/1/2014 to 1/11/2021 is 12% with the drawdown of 10.5% at 1x leverage; trading edge 0.99%.<br/>
 
+## PROCESS :
+**Backtest on daily timeframe:** <br/>
+The ranking and the signal generation is done in the same code on EQ database on a daily timeframe <br/>
+The exit in this case will be EOD or throughout the day based on strig and not at a particular time <br/>
+Use this process for ranking variable selection and checking the system strength <br/>
+
+**Backtest on 5 minute timeframe:**<br/>
+The ranking and signal generation are two different codes but run on the same database <br/>
+The ranking is done on a daily timeframe and the ranks are saved as composite symbols <br/>
+The backtest is then performed using the composite symbol rank on a 5 minute timeframe <br/>
+
+**Includeok code will be required**
+
