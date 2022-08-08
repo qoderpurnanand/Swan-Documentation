@@ -42,5 +42,21 @@ the Stop Loss is triggered,that particular leg is squared off and the other leg 
    many strikes further from the Short Strike should the Long option be bought. Depending on the moneyness of the Long Leg, the leverage changes. All the different
    versions and optimizations of this variant can be found in in Strategy Testing/Short Options/BankNifty Weekly Short Options on DropBox.
    
-   
+## VERSIONS:-   
+
+Currently for Live we are running the Minimum Premium Logic for Strike Selection and using a 3% POE and 12x Leverage for Strike Selection and 12x also for Position
+Sizing. StopLoss has been optimized such that there is a different Percentage Stop Loss for Every Day. Exit Time is 15:15:00pm. There is no Optimial Timing for
+Entry therefore we are trading 6 different systems spanning from 09:45:00am to 12:30:00pm with a gap of around 30-45 minutes between each system. Below is a list 
+of all the different variations we have tried (as of 16/06/2022) with BankNifty Weekly Short Options: 
+
+a) EntryTime,ExitTime,StopLoss Percentage,Long Option(Protection)Moneyness,Short Option Moneyness,Leverage,Percent Of Equity have been Optimized.(For All Versions)
+b) Minimum Premium Logic has been tested.
+c) With Regards to Long Options, Squaring off the Long Leg along with respective Short Leg at the same time and Squaring Off the Leg Long EOD have been tested.
+   (For All Versions)
+d) For Long, Buying OTM Strikes in multiples of 100 for Bank Nifty have been tested. Protection as a Percentage of Short Strike has also been tested.(For ATM,OTM)
+e) With regards to Long, Buying Monthly Options while going Short Weekly Options has been tested.(For ATM,OTM)
+f) With Respect to Leverage, Buying No protection when Max Upside is there and No extra Leverage when Long Options cannot be opened has been tested.(For ATM,OTM)
+g) Going Short ITM Strikes (100) has been tested.(For ATM,OTM)
+h) All this has been done on a 5 Min Time Frame.
+j) Different StopLosses Tried - % Move in the Option, % Of Move in BankNifty and 3 Day ATR Of the Index. % StopLoss on the Option Price is the best.(Only Tried for        Minimum Premium Logic)
     
