@@ -1,4 +1,4 @@
-## EXECUTION CODE
+## BACKTEST CODE
     ///Will need to include the Strike Price Selector to choose the correct Nifty Symbols///////
     ///Input Parameters///
     maxpos = 2;//Optimize("maxpos",2,1,5,1);
