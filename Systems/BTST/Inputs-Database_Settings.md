@@ -1,13 +1,3 @@
-## Inputs:
-Entry time: 091500 <br/>
-Exit time: 151000 or stoploss<br/>
-Transaction Cost: 0.15%<br/>
-Timeframe: Backtested on daily and 5 minute timeframe<br/>
-MaxPos: 15<br/>
-Stoploss: 6/10 ATR or min 2% or max 8%<br/>
-Ef: 0.1<br/>
-Vp: 4<br/>
-
 ## Database Details:
 
 DB Name: Network\iMAC2\f\All databases\Equities\ F&O Equities (EOD database) <br/>
