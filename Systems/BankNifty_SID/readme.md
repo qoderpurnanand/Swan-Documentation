@@ -35,8 +35,8 @@ the Stop Loss is triggered,that particular leg is squared off and the other leg 
    The Strike Selection for the long strike is also controlled from the Strike Price Selector. The Optimizations are saved in Strategy Testing/Short   
    Options/BankNifty Weekly Short Options on DropBox. This was tested with the short strike selection being At-The-Money,Out-Of-The-Money and Minimum Premium.
    Both those codes are here.
-   [BankNiftyShortOptions(ATM-OTM + Long](https://github.com/qodeinvestments/BankNifty-Weekly-ShortOptions-Intraday-/blob/e05de78f8072eef29511f93b6e4c571d429dbe47/Live_Codes/BankNiftyWeeklyShortOptions(ATM-OTM%20+%20Long)) and 
-   [BankNiftyShortOptions(MinPremium + Long](https://github.com/qodeinvestments/BankNifty-Weekly-ShortOptions-Intraday-/blob/eda9e3ae0d5e34203a052e7448452a2e30b9aeee/Live_Codes/BankNiftyWeeklyShortOptions(MinPremium%20+%20Long)) The latter code needs to be run on the
+   [BankNiftyShortOptions(ATM-OTM + Long)](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/BankNifty_SID/Backtest_Codes/BankNiftyWeeklyShortOptions(ATM-OTM%20%2B%20Long).md) and 
+   [BankNiftyShortOptions(MinPremium + Long)](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/BankNifty_SID/Backtest_Codes/BankNiftyWeeklyShortOptions(MinPremium%20%2B%20Long).md) The latter code needs to be run on the
    same database i.e "BankNifty (Weekly Continuous Contracts)" but on the "All Symbols DHF" watchlist. This code can only be run when there are no data holes.
    The variables that were optimized are the same as the ones mentioned in the earlier strategy additionally with the Long Strike being optimized to decide how 
    many strikes further from the Short Strike should the Long option be bought. Depending on the moneyness of the Long Leg, the leverage changes. All the different
