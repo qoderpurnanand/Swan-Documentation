@@ -7,7 +7,7 @@ the Stop Loss is triggered,that particular leg is squared off and the other leg 
 ## PROCESS:-
 
 1) Initially a simple backtest was done.This backtest is done on the BankNifty (Weekly Continuous Contracts) Database on the "All Symbols" watchlist 
-   which is in Amibroker/Index Option/Options of the All Database folder on the Common Drive (Drive E:).The Variables optimized were 1) Entry Time 2) Exit Time 3) Stop Loss Percentage 4) POE 5) Leverage. All these Optimizations are saved in 
+   which is in Amibroker/Index Option/Options of the All Database folder on the Common Drive (Drive E:). Using the BankNifty Weekly StrikePriceSelector we select going short a Straddle (ATM Call and Put) for the current expiry. A certain Percentage Stop Loss is kept on the option premium and the leg(s) where the stop loss is not triggered, are squared of at the end of the day.That code can be found here: [BankNiftyWeeklyShortOptionsIntraday](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/BankNifty_SID/Backtest_Codes/BankNiftyWeeklyShortOptions.md). The Variables optimized were 1) Entry Time 2) Exit Time 3) Stop Loss Percentage 4) POE 5) Leverage. All these Optimizations are saved in 
    Strategy Testing/Short Options/BankNifty Weekly Short Options on DropBox. The critical part in this code is the calculation of Minimum Premium which is 
    the Margin needed for opening a straddle (based on the leverage input) multiplied by the Percent Of Equity (POE) divided by the Current Lot Size.
    Position Size is linked to this Minimum Premium value. 
@@ -27,7 +27,7 @@ the Stop Loss is triggered,that particular leg is squared off and the other leg 
    Sizing. We now use Minimum Premium not only as a factor in position sizing but also to help select which strike to trade. The Option Price from the
    Option Chain which is closest to the Minimum Premium is traded.Variables Optimized were 1) Entry Time 2) Exit Time 3) Stop Loss Percentage 4) POE
    5) Levearge. All these Optimizations are saved in Strategy Testing/Short Options/BankNifty Weekly Short Options on DropBox. The Backtest Code for the
-   same can be found here.
+   same can be found here. [BankNiftyWeeklyShortOptions(MinPremium)](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/BankNifty_SID/Backtest_Codes/BankNiftyWeeklyShortOptions(MinPremium).md)
    
 5) Earlier in All Intraday (MIS) Options Strategies the NSE gave upto 25x Leverage. Since September 2021, this was changed and the Leverage was bought down to
    12x which is what all Overnight (NRML) Option Strategies get. Eventually, trading spreads is what we tried as that helps in reducing the Margin Required.
