@@ -27,3 +27,4 @@ Entry Signals:Based on Move in Banknifty
 Expiry Symbol: Trading Next Expiry on Expiry Days(Thursdays)
 
 The system involves buying the ATM Option based on movement in the index or the premium. For example: If the ATM option moves 40% in the day, we will buy the option and hold on till the next day. It could calls or puts.
+this is a test.
