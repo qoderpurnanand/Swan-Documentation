@@ -1,4 +1,4 @@
-## BTST Backtest (for live) hello
+## BTST Backtest (for live)
 
     #include <F&O Expiry selection.afl> 
     #include <F&O BanList.afl> 
