@@ -1,6 +1,6 @@
 ## F&O IncludeOK
 
-Excel sheet for reference - 
+Excel sheet for reference - [F&O IncludeOK](https://github.com/qodeinvestcments/Swan-Documentation/blob/main/Database%20Maintenance/F%26O%20IncludeOK/IncludeOK_FO%20Equity%20Daily.xlsx)
 
     if(Name() == "3IINFOTECH.EQ-NSE") { includeOK = (DateNum() >= 1070905 AND DateNum() < 1090626) OR (DateNum() >= 1101029 AND DateNum() < 1120224); }
     if(Name() == "ABAN.EQ-NSE") { includeOK = DateNum() >= 1061229 AND DateNum() < 1120928; }
