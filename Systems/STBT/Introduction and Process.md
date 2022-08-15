@@ -12,7 +12,8 @@ PROCESS : -
     The Analysis is done on the "F&O Equities" Database within the Equities subfolder of the All Database folder on the Common Drive (Drive E:).
    
 2) Within the "F&O Equities" Database, there is a "F&O Stocks" watchlist. On that watchlist, run the Trend Analysis AFL Code on Amibroker.
-   [AmibrokerTrendAnalysis](https://github.com/qodeinvestments/STBT/blob/4f15b1ebb04a99c46bbfa4c2db33b8619fd36b8b/Amibroker_Codes/AmibrokerTrendAnalysis).
+   [AmibrokerTrendAnalysis]https://github.com/qodeinvestments/Swan-
+   Documentation/blob/38909dcc7b8410b6fb26822f0603b559d8105742/Systems/STBT/Amibroker_Codes/AmibrokerTrendAnalysis
       
 3) The Output from Amibroker is then saved on a CSV File. On the CSVFile the Python Trend Analysis code is run.
    [PythonTrendAnalysis](https://github.com/qodeinvestments/BTST/blob/1d853e1b2ace93400c901135716380767f868c7e/Amibroker_Codes/PythonTrendAnalysis.ipynb)
