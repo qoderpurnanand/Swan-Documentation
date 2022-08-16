@@ -32,23 +32,22 @@ PROCESS : -
    All the codes are mentioned below: [STBTShortRankTimeEquityRankingFutureTrade]
    https://github.com/qodeinvestments/Swan-Documentation/blob/8c7e2032edf510ea9d4886ef4c41c7f9a91f7c51/Systems/STBT/Amibroker_Codes/STBTShortRankTimeEquityRankingFutureTrade.afl
    [STBTShortRankTimeFutureRankingFutureTrade]
-   https://github.com/qodeinvestments/BTST/blob/756d6b8076b22f1e95334900e9e63fc2930e65e5/Amibroker_Codes/BTSTBuyRankTimeFutureRankingFutureTrade.afl
+   https://github.com/qodeinvestments/Swan-Documentation/blob/197b2f1f1590a86d2eccddd020c39c75efea846a/Systems/STBT/Amibroker_Codes/STBTShortRankTimeFutureRankingFutureTrade.afl
    [STBTShortAllDayEquityRankingFutureTrade]
-   https://github.com/qodeinvestments/BTST/blob/292bc13547fc7a3e8d36d76be2954729222d1e83/Amibroker_Codes/BTSTBuyAllDayEquityRankingFutureTrade.afl
+   https://github.com/qodeinvestments/Swan-Documentation/blob/197b2f1f1590a86d2eccddd020c39c75efea846a/Systems/STBT/Amibroker_Codes/STBTShortAllDayEquityRankingFutureTrade.afl
    [STBTShortAllDayFutureRankingFutureTrade]
-   https://github.com/qodeinvestments/BTST/blob/756d6b8076b22f1e95334900e9e63fc2930e65e5/Amibroker_Codes/BTSTBuyAllDayFutureRankingFutureTrade.afl
-   
+    https://github.com/qodeinvestments/Swan-Documentation/blob/197b2f1f1590a86d2eccddd020c39c75efea846a/Systems/STBT/Amibroker_Codes/STBTShortAllDayFutureRankingFutureTrade.afl
+    
    In case the Backtest is where Ranking is done on Equities and Trading on the Futures, the ranking has to be done on the "F&O Equities" database first.
-   For that to be done, this particular code needs to be run [BTSTRankingCompositeSymbols]
-   https://github.com/qodeinvestments/BTST/blob/de841f1b8edf1993bb6908b9ee526bf1b5056ed8/Amibroker_Codes/BTSTRankingCompositeSymbols
+   For that to be done, this particular code needs to be run [STBTRankingCompositeSymbols]
+   https://github.com/qodeinvestments/Swan-Documentation/blob/197b2f1f1590a86d2eccddd020c39c75efea846a/Systems/STBT/Amibroker_Codes/STBTRankingCompositeSymbols
    Once the Composite symbols are created, they are copied on to the "Futures Database (Continuous)" and the Optimizations and backtest continues from 
    there onwards.
    
  8) The following variables have been optimized for Ranking on Equity and Backtest on Equity and for Buying at RankTime and Buying All Day: 
-    a) MaxOpenPositions b) RankTime c) MaxTime d) GapPercent e) SellTime. Also Optimizations have been done for GapPercent using 090700 Open and 091500
-    Open. Similarly,the same set of Variables have been optimized for Ranking on Futures and Backtest on Futures and for Ranking on Equity and Backtest on Futures
-    for Buying at RankTime and Buying All Day. All the Optimizations have been saved on 
-    E:\Dropboximac\Dropbox\Strategy Testing\BTST\2022\BTST Optimizations (01012013 - 31122021) on the E: Drive.
+    a) MaxOpenPositions b) RankTime c) MaxTime d) GapPercent e) SellTime.Similarly,the same set of Variables have been optimized for Ranking on Futures and 
+    Backtest on Futures and for Ranking on Equity and Backtest on Futures for Shorting at RankTime and Shorting All Day. All the Optimizations have been saved on 
+    E:\Dropboximac\Dropbox\Strategy Testing\STBT\2022\STBT Optimizations (01012013 - 31122021) on the E: Drive.
     
  9) Every Backtest code mentioned above also has a Limit Order Logic to it which is commented in the code. To use that snippet, uncomment it and then comment  
     the normal Buy, Sell rules.  
