@@ -50,7 +50,7 @@ PROCESS : -
     E:\Dropboximac\Dropbox\Strategy Testing\STBT\2022\STBT Optimizations (01012013 - 31122021) on the E: Drive.
     
  9) Every Backtest code mentioned above also has a Limit Order Logic to it which is commented in the code. To use that snippet, uncomment it and then comment  
-    the normal Buy, Sell rules.  
+    the normal Short, Cover Rules.  
    
 
 
