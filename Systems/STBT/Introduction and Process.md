@@ -29,7 +29,8 @@ PROCESS : -
 7) Two versions have been backtested. One is Shorting at a particular time and the other is Shorting throughout the day.Within each of them there are two
    different methadologies adopted. One is where the Ranking is done on the Equity Symbols and Backtest is done on Future Symbols and the other one is 
    where Ranking and the Backtest are done on Future Symbols.
-   All the codes are mentioned below: [STBTShortRankTimeEquityRankingFutureTrade]https://github.com/qodeinvestments/SwanDocumentation/blob/8c7e2032edf510ea9d4886ef4c41c7f9a91f7c51/Systems/STBT/Amibroker_Codes/STBTShortRankTimeEquityRankingFutureTrade.afl
+   All the codes are mentioned below: [STBTShortRankTimeEquityRankingFutureTrade]
+   https://github.com/qodeinvestments/Swan-Documentation/blob/8c7e2032edf510ea9d4886ef4c41c7f9a91f7c51/Systems/STBT/Amibroker_Codes/STBTShortRankTimeEquityRankingFutureTrade.afl
    [STBTShortRankTimeFutureRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/756d6b8076b22f1e95334900e9e63fc2930e65e5/Amibroker_Codes/BTSTBuyRankTimeFutureRankingFutureTrade.afl
    [STBTShortAllDayEquityRankingFutureTrade]
