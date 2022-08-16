@@ -3,7 +3,7 @@
 
 INTRODUCTION : -
    STBT is an acronym for "Sell Today, Buy Tomorrow". Stocks on the Downward Trajectory that fulfill a minimum percentage criteria from the Open of the day 
-   till any given time are given a Rank and are Short Sold if they come under the top nth rank .These Stocks are then squared the at the early minutes of 
+   till any given time are given a Rank and are Short Sold if they come under the top nth rank .These Stocks are then squared off at the early minutes of 
    the very next trading session.
 
 
@@ -25,21 +25,17 @@ PROCESS : -
 
 6) Once a graphical representation of the trend is done on Python, we go ahead with doing an exhaustive Optimization and Backtest on Amibroker.
 
-7) Two versions have been backtested. One is buying at a particular time and the other is buying throughout the day.Within each of them there are
-   different methadologies adopted. One is where the Ranking and Backtest is done on the Equities Symbols. The other is where Ranking is 
-   done on the Equity Symbols and Backtest is done on Future Symbols and lastly where Ranking and the Backtest is done on Future Symbols.
+7) Two versions have been backtested. One is Shorting at a particular time and the other is Shorting throughout the day.Within each of them there are two
+   different methadologies adopted. One is where the Ranking is done on the Equity Symbols and Backtest is done on Future Symbols and the other one is 
+   where Ranking and the Backtest are done on Future Symbols.
    All the codes are mentioned below: 
-   [BTSTBuyRankTimeEquityRankingFutureTrade]
+   [STBTBuyRankTimeEquityRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/292bc13547fc7a3e8d36d76be2954729222d1e83/Amibroker_Codes/BTSTBuyRanktimeEquityRankingFutureTrade.afl
-   [BTSTBuyRankTimeEquityRankingEquityTrade]
-   https://github.com/qodeinvestments/BTST/blob/292bc13547fc7a3e8d36d76be2954729222d1e83/Amibroker_Codes/BTSTBuyRanktimeEquityRankingEquityTrade.afl
-   [BTSTBuyRankTimeFutureRankingFutureTrade]
+   [STBTBuyRankTimeFutureRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/756d6b8076b22f1e95334900e9e63fc2930e65e5/Amibroker_Codes/BTSTBuyRankTimeFutureRankingFutureTrade.afl
-   [BTSTBuyAllDayEquityRankingFutureTrade]
+   [STBTBuyAllDayEquityRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/292bc13547fc7a3e8d36d76be2954729222d1e83/Amibroker_Codes/BTSTBuyAllDayEquityRankingFutureTrade.afl
-   [BTSTBuyAllDayEquityRankingEquityTrade]
-   https://github.com/qodeinvestments/BTST/blob/292bc13547fc7a3e8d36d76be2954729222d1e83/Amibroker_Codes/BTSTBuyAllDayEquityRankingEquityTrade.afl
-   [BTSTBuyAllDayFutureRankingFutureTrade]
+   [STBTBuyAllDayFutureRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/756d6b8076b22f1e95334900e9e63fc2930e65e5/Amibroker_Codes/BTSTBuyAllDayFutureRankingFutureTrade.afl
    
    In case the Backtest is where Ranking is done on Equities and Trading on the Futures, the ranking has to be done on the "F&O Equities" database first.
