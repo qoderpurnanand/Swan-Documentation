@@ -16,7 +16,8 @@ PROCESS : -
    https://github.com/qodeinvestments/Swan-Documentation/blob/595a1eb90e4b7f4922b4d50ea811ebe68cf368ca/Systems/STBT/Amibroker_Codes/AmibrokerTrendAnalysis
       
 3) The Output from Amibroker is then saved on a CSV File. On the CSVFile the Python Trend Analysis code is run.
-   [PythonTrendAnalysis](https://github.com/qodeinvestments/BTST/blob/1d853e1b2ace93400c901135716380767f868c7e/Amibroker_Codes/PythonTrendAnalysis.ipynb)
+   [PythonTrendAnalysis]
+   https://github.com/qodeinvestments/Swan-Documentation/blob/4008f1f1cf08673c902e6211869a1be14a1ca75e/Systems/STBT/Amibroker_Codes/AmibrokerTrendAnalysis
 
 4) The above analysis is done only on Equities. The same analysis is then done on Future Symbols. There is an "All Symbols" watchlist on the 
    "Futures Database (Continuous)" within the Futures subfolder of the All Database folder on the Common Drive (Drive E:). 
