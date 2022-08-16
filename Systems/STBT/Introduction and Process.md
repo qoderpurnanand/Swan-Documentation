@@ -30,13 +30,14 @@ PROCESS : -
    different methadologies adopted. One is where the Ranking is done on the Equity Symbols and Backtest is done on Future Symbols and the other one is 
    where Ranking and the Backtest are done on Future Symbols.
    All the codes are mentioned below: 
-   [STBTBuyRankTimeEquityRankingFutureTrade]
-   https://github.com/qodeinvestments/BTST/blob/292bc13547fc7a3e8d36d76be2954729222d1e83/Amibroker_Codes/BTSTBuyRanktimeEquityRankingFutureTrade.afl
-   [STBTBuyRankTimeFutureRankingFutureTrade]
+   [STBTShortRankTimeEquityRankingFutureTrade] 
+   https://github.com/qodeinvestments/Swan-           
+   Documentation/blob/8c7e2032edf510ea9d4886ef4c41c7f9a91f7c51/Systems/STBT/Amibroker_Codes/STBTShortRankTimeEquityRankingFutureTrade.afl
+   [STBTShortRankTimeFutureRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/756d6b8076b22f1e95334900e9e63fc2930e65e5/Amibroker_Codes/BTSTBuyRankTimeFutureRankingFutureTrade.afl
-   [STBTBuyAllDayEquityRankingFutureTrade]
+   [STBTShortAllDayEquityRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/292bc13547fc7a3e8d36d76be2954729222d1e83/Amibroker_Codes/BTSTBuyAllDayEquityRankingFutureTrade.afl
-   [STBTBuyAllDayFutureRankingFutureTrade]
+   [STBTShortAllDayFutureRankingFutureTrade]
    https://github.com/qodeinvestments/BTST/blob/756d6b8076b22f1e95334900e9e63fc2930e65e5/Amibroker_Codes/BTSTBuyAllDayFutureRankingFutureTrade.afl
    
    In case the Backtest is where Ranking is done on Equities and Trading on the Futures, the ranking has to be done on the "F&O Equities" database first.
