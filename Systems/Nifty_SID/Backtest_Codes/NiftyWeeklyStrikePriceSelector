@@ -1,0 +1,58 @@
+_SECTION_BEGIN("Price"); 
+SetChartOptions(0,chartShowArrows|chartShowDates); 
+_N(Title = StrFormat("{{NAME}} - {{INTERVAL}} {{DATE}} Open %g, Hi %g, Lo %g, Close %g (%.1f%%) Vol " +WriteVal( V, 1.0 ) +" {{VALUES}}", O, H, L, C, SelectedValue( ROC( C, 1 )) )); 
+Plot( C, "Close", ParamColor("Color", colorDefault ), styleNoTitle | ParamStyle("Style") | GetPriceStyle() );  
+
+TimeFrameSet(inDaily);
+#include <ExpiryDates.afl>  
+OptionExpiryDate = DateTimeConvert(2,WeeklyExpiryDate);
+StartDate = DateTimeConvert(2,DateNum());
+DTE = round(DateTimeDiff(OptionExpiryDate,StartDate)/(3600*24));
+TimeFrameRestore();
+
+DaysToExpiry = TimeFrameExpand(DTE,inDaily,expandFirst);
+NextExpirySym = IIf(StrRight(Name(),2)=="-I",1,0);
+
+StrikePrice = iif(StrLen(Name())==18,StrToNum(StrLeft(StrRight(Name(),7),5)),StrToNum(StrLeft(StrRight(Name(),6),4)));
+Type = StrRight(Name(),2);
+//StrikePrice1 = iif(StrLen(Name())==18,StrToNum(StrLeft(StrRight(Name(),7),5)),StrToNum(StrLeft(StrRight(Name(),6),4)));
+//StrikePrice2 = iif(StrLen(Name())==20,StrToNum(StrLeft(StrRight(Name(),9),5)),StrToNum(StrLeft(StrRight(Name(),8),4)));
+//StrikePrice  = IIf(NextExpirySym==0,StrikePrice1,StrikePrice2);  
+
+//Type = WriteIf(nextexpirysym==1,StrLeft(StrRight(Name(),4),2),StrRight(Name(),2));
+
+NiftyClose = Foreign("$NIFTY-NSE","Close");
+CallATM = (round(NiftyClose/50)*50);
+PutATM = (round(NiftyClose/50)*50);
+
+Pf = 0;
+
+CallDeepOTM = CallATM + Pf;
+PutDeepOTM = PutATM - Pf;
+
+CallSelection = IIf(Type == "CE" AND (StrikePrice == CallDeepOTM /*AND StrikePrice <= CallDeepOTM*/ ), 1 , 0);
+PutSelection = IIf(Type == "PE" AND (/*StrikePrice >= PutDeepOTM AND */StrikePrice == PutDeepOTM ), 1 , 0);
+
+StrikePriceSelector = CallSelection OR PutSelection;
+
+Moneyness = 0;//Optimize("Moneyness",500,100,1000,50);
+
+Code  = IIf(StrLen(Name())==18,StrToNum(strmid(Name(),11,1))*10000 + StrToNum(strmid(Name(),12,1))*1000 + StrToNum(StrMid(Name(),13,1))*100,StrToNum(strmid(Name(),11,1))*1000 + StrToNum(strmid(Name(),12,1))*100 + StrToNum(StrMid(Name(),13,1))*10);
+
+LongCallOTM = CallDeepOTM + Moneyness;
+LongPutOTM = PutDeepOTM - Moneyness;
+
+LongCallSelection = IIf(Type == "CE" AND StrikePrice == LongCallOTM /*AND StrikePrice >= CallATM*/, 1 , 0);
+LongPutSelection = IIf(Type == "PE" AND StrikePrice == LongPutOTM /*AND StrikePrice <= PutATM*/, 1 , 0);
+
+LongStrikePriceSelector = LongCallSelection OR LongPutSelection;
+
+
+
+
+
+
+
+
+
+
