@@ -8,10 +8,10 @@ the very next trading session.
     The Analysis is done on the "F&O Equities" Database within the Equities subfolder of the All Database folder on the Common Drive (Drive E:).
    
 2) Within the "F&O Equities" Database, there is a "F&O Stocks" watchlist. On that watchlist, run the Trend Analysis AFL Code on Amibroker.
-   [AmibrokerTrendAnalysis](https://github.com/qodeinvestments/Swan-Documentation/blob/595a1eb90e4b7f4922b4d50ea811ebe68cf368ca/Systems/STBT/Amibroker_Codes/AmibrokerTrendAnalysis)
+   [AmibrokerTrendAnalysis](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/Trend_Analysis/AmibrokerTrendAnalysis.md)
       
 3) The Output from Amibroker is then saved on a CSV File. On the CSVFile the Python Trend Analysis code is run.
-   [PythonTrendAnalysis](https://github.com/qodeinvestments/Swan-Documentation/blob/4008f1f1cf08673c902e6211869a1be14a1ca75e/Systems/STBT/Amibroker_Codes/AmibrokerTrendAnalysis)
+   [PythonTrendAnalysis](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/Trend_Analysis/PythonTrendAnalysis.ipynb)
 
 4) The above analysis is done only on Equities. The same analysis is then done on Future Symbols. There is an "All Symbols" watchlist on the 
    "Futures Database (Continuous)" within the Futures subfolder of the All Database folder on the Common Drive (Drive E:). 
