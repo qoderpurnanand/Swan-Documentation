@@ -16,6 +16,11 @@ Along with Backtest Codes, there are a few Ancillary codes that form a part of t
    which are called "FUT". 
    [F&O Expiry Selection](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/F%26O%20Expiry%20Selection.md)
    
+4) **Trend Analysis: -**
+   We have also performed a trend analysis for this particular system, the codes of which are present in the below given links for reference - <br/>
+   [AmiBroker Trend Analysis](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/Trend_Analysis/AmibrokerTrendAnalysis.md)<br/>
+   [Python Trend Analysis](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/Trend_Analysis/PythonTrendAnalysis.ipynb)
+   
    
    
    
