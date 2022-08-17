@@ -1,1 +1,1 @@
-The recent optimization was done on January, 2022.
+The recent optimization was done on 30th June, 2022.
