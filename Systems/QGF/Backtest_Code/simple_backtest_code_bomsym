@@ -1,0 +1,25 @@
+SetOption("InitialEquity",1000000);
+SetOption("Maxopenpositions",30);
+SetPositionSize(100/30,spsPercentOfEquity);
+Includeok=0;
+includeoknse=0;
+#Include <QGFIncludeok.afl>
+#Include <QGFIncludeoknse.afl>
+
+bi = BarIndex();
+exitLastBar = bi == LastValue( bi );
+nsesym = IIf(StrRight(Name(),6)=="EQ-NSE",1,0);
+//includeok = IIf(includeoknse==1,includeok=0,includeok);
+symlist = IIf(Name()=="TECHELE-BOM" OR Name()=="MAHELEK-BOM" OR Name()=="BAYERCROP-BOM" OR Name()=="CMIFPE-BOM" OR Name()=="WABCOINDIA-BOM" OR Name()=="SPECTACLE-BOM" OR Name()=="WHIRLPOOL-BOM",1,0);
+datefilter = IIf((DateNum()<=1110701 AND nsesym ==1) OR symlist==1,1,IIf(DateNum()>1110701 AND nsesym==0,1,0)); 
+esym = IIf(nsesym==1,includeoknse,includeok);
+
+
+Buy = esym==1 AND datefilter;
+Sell = esym==0 OR  exitlastbar;
+
+BuyPrice =Close;
+SellPrice =Close;
+
+Filter=1;
+AddColumn(Buy,"Buy");
