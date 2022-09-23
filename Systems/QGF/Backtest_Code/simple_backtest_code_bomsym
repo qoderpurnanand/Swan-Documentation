@@ -1,3 +1,9 @@
+# This code is different becuase we need to Buy nse symbols prior to 2011 because BOM syms are NOT there
+# prior to that. Hence this code is used with an extra NSE Sym Includeok too 
+# Also we are Buy 2008 symbols is Jan to check
+
+
+
 SetOption("InitialEquity",1000000);
 SetOption("Maxopenpositions",30);
 SetPositionSize(100/30,spsPercentOfEquity);
