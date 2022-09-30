@@ -38,6 +38,8 @@ On Expiry day, intrinsic value has been calculated and used for in the money opt
 - The margin required for 1 unit will be Index exposure + total stock exposure
 - No of units = (equity available)/ (margin required for 1 unit)
 
+MinShareExposure: Exposure required to open a position in the stock with the lowest index weightage.
+MinShareValue: Equity price of the stock with the lowest index weightage.
 ### Entry: 
 First day of the month 
 ### Exit: 
