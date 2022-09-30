@@ -5,7 +5,7 @@ Correlation among index components. For instance, an index may have zero change 
 The goal of this strategy is to identify when implied correlation is low, indicating that index option premiums are undervalued relative to that of stock options.
 
 ## Objective: 
-To exploit the correlation between Nifty and it's constituents. This can be achieved by buying at-the-money (ATM) index option straddles and simultaneously selling at-the-money straddles in the options of the index components on a weighted basis, for this version of the backtest.  
+To exploit the correlation between Nifty and it's constituents. This can be achieved by buying index option straddles and simultaneously selling straddles in the options of the index components on a weighted basis, for this version of the backtest.  
 
 Ideally, with perfect correlation, the stocks should run up or fall equally with the index, in which case both our longs and shorts will make money. 
 It is a delta neutral strategy. We trade the Implied correlation between the index and it's constituents.
@@ -21,6 +21,7 @@ When the ratio is low there is low correlation between the index and it's consti
 - Expiry dates
 - Stock weights
 - Strike Selection: We have used strikes closest to the delta (due to inavailablity of data/low liquidity in some stocks).
+
 Data holes have been filled with the last available values for that month.
 On Expiry day, intrinsic value has been calculated and used for in the money options and for out of the money options, option price is set to 0.05 .
 
