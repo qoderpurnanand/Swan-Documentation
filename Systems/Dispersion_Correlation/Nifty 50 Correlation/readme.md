@@ -1,4 +1,4 @@
-#Nifty Correlation
+# Nifty Correlation
 
 Objective: To exploit the correlation between Nifty and it's constituents. We go long both calls and puts of the index(monthly expiry) and short both calls and puts of the stocks. 
 
@@ -36,7 +36,7 @@ On Expiry day, intrinsic value has been calculated and used for in the money opt
 
 Entry: First day of the month 
 Exit: Monthly expiry 
-Adjustments: None 
+Adjustments: None \n
 Optimisations: The backtest was run for all deltas in the range of 5 to 50.
 
 [Delta comparison.xlsx](https://github.com/qodeinvestments/Swan-Documentation/files/9680872/comparison.final.xlsx)
