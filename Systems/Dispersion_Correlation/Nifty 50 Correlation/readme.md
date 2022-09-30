@@ -12,7 +12,7 @@ It is a delta neutral strategy. We trade the Implied correlation between the ind
 
 Implied Correlation is the correlation between the implied volatilities of index options and the weighted implied volatilities of options on the index components.
 When the ratio is low there is low correlation between the index and it's constituents and when the ratio is high there is high correlation between the index and it's constituents.
-Ideally, we want the ratio to be low when we are opening positions.
+(Ideally, we want the ratio to be low when we are opening positions.)
 
 ## Backtest:
 
@@ -24,7 +24,8 @@ Ideally, we want the ratio to be low when we are opening positions.
 Data holes have been filled with the last available values for that month.
 On Expiry day, intrinsic value has been calculated and used for in the money options and for out of the money options, option price is set to 0.05 .
 
-### Leverage=10x
+### Leverage
+10x 
 
 ### Position Sizing:
 - In this backtest, we have assigned quantities based on the market caps of the stocks, using minimum share logic.
@@ -36,8 +37,6 @@ On Expiry day, intrinsic value has been calculated and used for in the money opt
 - The margin required for 1 unit will be Index exposure + total stock exposure
 - No of units= equity available/margin required for 1 unit
 
-
-
 ### Entry: 
 First day of the month 
 ### Exit: 
@@ -48,3 +47,7 @@ None
 The backtest was run for all deltas in the range of 5 to 50.
 
 [Delta comparison.xlsx](https://github.com/qodeinvestments/Swan-Documentation/files/9680872/comparison.final.xlsx)
+
+
+
+Database Path: \\iMAC2\F\All Databases\Extra\Nifty 50 Correlation EoD database
