@@ -49,6 +49,6 @@ None
 ### Optimisations: 
 The backtest was run for all deltas in the range of 5 to 50.
 
-[DeltaComparison.xlsx](https://github.com/qodeinvestments/Swan-Documentation/files/9683246/comparison.final.xlsx)
+[DeltaComparison.xlsx](https://github.com/qodeinvestments/Swan-Documentation/files/9683261/DeltaComparison.xlsx)
 
 Database Path: \\iMAC2\F\All Databases\Extra\Nifty 50 Correlation EoD database
