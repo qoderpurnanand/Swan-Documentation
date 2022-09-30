@@ -1,6 +1,6 @@
 # Nifty Correlation
 
-Objective: To exploit the correlation between Nifty and it's constituents. We go long both calls and puts of the index(monthly expiry) and short both calls and puts of the stocks. 
+## Objective: To exploit the correlation between Nifty and it's constituents. We go long both calls and puts of the index(monthly expiry) and short both calls and puts of the stocks. 
 
 Ideally, with perfect correlation, the stocks should run up or fall equally with the index, in which case both our longs and shorts will make money. 
 It is a delta neutral strategy. We trade the Implied correlation between the index and it's constituents.
