@@ -1,7 +1,10 @@
 # Nifty Correlation
 
+### Correlation:
+Correlation among index components. For instance, an index may have zero change for a day either because none of the components moved, or because half of the components rose while the other half fell. In the first case, the correlation would be very high, while in the second case the correlation would be very low. In other words, an index can have very low volatility in and of itself, while its components may actually be quite volatile independently.
+
 ## Objective: 
-To exploit the correlation between Nifty and it's constituents. We go long both calls and puts of the index(monthly expiry) and short both calls and puts of the stocks. 
+To exploit the correlation between Nifty and it's constituents. This can be achieved by buying at-the-money (ATM) index option straddles and simultaneously selling at-the-money straddles in the options of the index components on a weighted basis, for this version of the backtest.  
 
 Ideally, with perfect correlation, the stocks should run up or fall equally with the index, in which case both our longs and shorts will make money. 
 It is a delta neutral strategy. We trade the Implied correlation between the index and it's constituents.
