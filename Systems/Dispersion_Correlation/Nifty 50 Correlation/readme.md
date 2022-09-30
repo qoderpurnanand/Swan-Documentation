@@ -2,6 +2,7 @@
 
 ### Correlation:
 Correlation among index components. For instance, an index may have zero change for a day either because none of the components moved, or because half of the components rose while the other half fell. In the first case, the correlation would be very high, while in the second case the correlation would be very low. In other words, an index can have very low volatility in and of itself, while its components may actually be quite volatile independently.
+The goal of this strategy is to identify when implied correlation is low, indicating that index option premiums are undervalued relative to that of stock options.
 
 ## Objective: 
 To exploit the correlation between Nifty and it's constituents. This can be achieved by buying at-the-money (ATM) index option straddles and simultaneously selling at-the-money straddles in the options of the index components on a weighted basis, for this version of the backtest.  
