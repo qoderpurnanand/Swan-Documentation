@@ -28,7 +28,7 @@ Position Sizing:
 - Index exposure and total stock exposure will be the same
 - The margin required for 1 unit will be Index exposure + total stock exposure
 - No of units= equity available/margin required for 1 unit
--
+
 
 
 Data holes have been filled with the last available values for that month.
@@ -39,4 +39,4 @@ Exit: Monthly expiry
 Adjustments: None 
 Optimisations: The backtest was run for all deltas in the range of 5 to 50.
 
-[comparison final.xlsx](https://github.com/qodeinvestments/Swan-Documentation/files/9680872/comparison.final.xlsx)
+[Delta comparison.xlsx](https://github.com/qodeinvestments/Swan-Documentation/files/9680872/comparison.final.xlsx)
