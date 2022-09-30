@@ -17,6 +17,8 @@ Ideally, we want the ratio to be low when we are opening positions.
 - Expiry dates
 - Stock weights
 - Strike Selection: We have used strikes closest to the delta (due to inavailablity of data/low liquidity in some stocks).
+Data holes have been filled with the last available values for that month.
+On Expiry day, intrinsic value has been calculated and used for in the money options and for out of the money options, option price is set to 0.05 .
 
 ### Leverage=10x
 
@@ -31,9 +33,6 @@ Ideally, we want the ratio to be low when we are opening positions.
 - No of units= equity available/margin required for 1 unit
 
 
-
-Data holes have been filled with the last available values for that month.
-On Expiry day, intrinsic value has been calculated and used for in the money options and for out of the money options, option price is set to 0.05 .
 
 ### Entry: 
 First day of the month 
