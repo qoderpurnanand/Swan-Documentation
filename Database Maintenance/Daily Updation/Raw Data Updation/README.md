@@ -16,6 +16,4 @@ Pseudo Code:
  3.cursore=conn.cursor:It is an object that is used to make the connection for executing SQL queries. 
  4.cursor.execute-To run the query
  5.conn.commit-To save
- 6.conn.close-To close the connection
- 
-  
+ 6.conn.close-To close the connection.
