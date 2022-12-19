@@ -1,0 +1,155 @@
+Creating/installing a custom python library:
+
+Article reference: https://towardsdatascience.com/create-your-custom-python-package-that-you-can-pip-install-from-your-git-repository-f90465867893
+
+Short explanation:
+
+1.To create a package folder on github (eg "Toolbox" is a folder and below are the files in that folder)
+    You can check this link for the format: https://github.com/VidhiChheda/toolbox
+    
+    Make sure it’s a public repo.
+
+    Eg. Create a repository “toolbox” on github which has following files:
+        a.Readme.md – document the library use
+        b.Setup.py
+        c..gitignore
+        d.A package folder “toolbox” that has the .py functions: 
+            toolbox/Hello.py
+            toolbox/Whatsup.py
+            toolbox\__init__.py
+            
+If you are not creating any libraries and just using the given packages built on Qode: you can ignore the first step and directly follow from the second step:
+
+2.Download git on your pc
+      Without this the installation of package won’t work.
+      https://git-scm.com/downloads
+      For windows:
+      https://git-scm.com/download/win
+
+3.Pip install
+      Open anaconda prompt and paste this url to install package.
+      Copy the URL of your repository. You can pip install your package with this URL like this:
+      pip install git+https://github.com/VidhiChheda/toolbox.git
+
+4.Check if the package is installed in the pc folder
+      Folder path to check:
+      C:\Users\admin\anaconda3\Lib\site-packages\toolbox
+
+5.Check the code
+      Run your code and check for errors.
+      import toolbox 
+      from toolbox import hellofunc 
+      hellofunc()
+
+6.Updating package
+      If you have made any changes to the library on github, reinstall using anaconda prompt. Use this:
+      pip install --force-reinstall --no-deps git+https://github.com/VidhiChheda/toolbox.git
+
+Note: Each package needs to be a different repository. Currently unable to figure out if multiple packages can have same repo. Solution is welcome.
+
+
+Detailed explanation:
+
+1.Create package folder on github (Toolbox is a folder and below are the files in that folder)
+    Create a folder with the name of your package. In my case, this is “toolbox”. This will be the package we’re installing. We’ll create some files in the package folder:
+
+        1.toolbox\Hello.py
+        2.toolbox\Whatsup.py
+        These files will hold some of the functions that we want to share. I’ve included 2 functions:
+
+            def hellofunc():
+                print("Hello my dear friend. Thanks for calling me.")
+
+            def askWellBeing():
+                print("How are you my friend? I hope you are doing great in your life.")
+     
+         3.toolbox/__init__.py
+            This will tell Python that the toolbox folder is a python package. This file can also be used to import functions so that we can import the functions we have created. Eg.
+
+                from .Hello import hellofunc
+                from .Whatsup import askWellBeing
+
+            Creating this file is required but the content is optional.
+
+2.Create setup.py
+    This file is required for telling pip what your package needs for it to be installed. Let’s take a look at the setup.py that I’ve used.
+
+        import setuptools
+
+        with open("README.md", "r", encoding="utf-8") as fh:
+            long_description = fh.read()
+
+        setuptools.setup(
+            name='toolbox',
+            version='0.0.3',
+            author='Vidhi Chheda',
+            author_email='vidhi@swancapital.com',
+            description='Testing installation of Package',
+            long_description=long_description,
+            long_description_content_type="text/markdown",
+            url='https://github.com/vidhi-chheda/toolbox',
+            project_urls = {
+                "Bug Tracker": "https://github.com/vidhi-chheda/toolbox/issues"},
+            #license='MIT',
+            packages=['toolbox'],
+            install_requires=['requests'],
+        )
+
+        explanation:
+        Line 2: load README.md in a variable called long_description. This is optional.
+        Line 5: Give our package a name. Must match your package folder name
+        Line 6. Which is the version of our package. Pip uses this version to see if packages need updating so make sure to increment it if you want users to be able to update
+        Line 10 and 11: loads the README.md from line 3; line 13 indicates the format of the readme.
+        Line 12: URL to your repo
+        Line 13: optionally list some handy URLs
+        Line 15: We don’t require to add license
+        Line 16: list of all packages that need to be built: make sure this matches your package folder name
+        Line 17: list of packages that your package relies upon. Even though none of my functions use requests I’ve decided to include it for demonstration purposes. Including a package here makes sure that when pip installing the toolbox package, requests gets installed first so that toolbox can use it.
+
+
+3.Distributing our code via GitHub
+     Now that our package is created we can use a repository for distribution. First, we’ll create the repository and use it to pip install our package. Finally, we’ll update our package after we’ve changed the source code.
+      You can check this link for the format: https://github.com/VidhiChheda/toolbox
+      Create a repository on your github ac or qode investments github ac once the library is ready.
+      
+
+      Create a .gitignore while creating repository and input:
+
+      venv/
+      .idea/
+      instructions.txt
+
+      If you want others to use the library make sure its public and not private.
+      Link to make your repo public: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility
+      
+4.Download git on your pc
+      Without this the installation of package won’t work.
+      https://git-scm.com/downloads
+      For windows:
+      https://git-scm.com/download/win
+      
+5.Pip install
+      Open anaconda prompt and paste this url to install package.
+      Copy the URL of your repository. You can pip install your package with this URL like this:
+      pip install git+https://github.com/VidhiChheda/toolbox.git
+
+6.Check if the package is installed in the folder
+      Folder path to check:
+      C:\Users\admin\anaconda3\Lib\site-packages\toolbox
+
+7.Check your code
+      Run your code and check for errors.
+
+8.Updating package
+      If you have made any changes to the library on github, reinstall using anaconda prompt. Use this:
+      pip install --force-reinstall --no-deps git+https://github.com/VidhiChheda/toolbox.git
+
+
+      
+
+
+
+
+
+
+
