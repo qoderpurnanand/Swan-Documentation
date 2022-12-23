@@ -9,7 +9,7 @@ review of such a system is necessary.Following process has been adopted for the 
 Period: 13.01.2022 - 24.11.2022
 Slippage: Matched with Live(take same for BT)
 Reference: Dropbox---> KavanRanking ---> Rankingsheets with Date(Rankingdate is one day prior to trade_Date)
-Excludeok Code: From 02-03-2022 onwards: []
+Excludeok Code: From 02-03-2022 onwards: Excludeok[https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/NSE500/nse500_excludeok_24.11.2022]
 
 ### Process: - 
 
