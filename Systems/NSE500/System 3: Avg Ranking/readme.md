@@ -40,3 +40,6 @@ Entire Backtest since Inception: Without Excludeok: Volume Ranking
 
 ![image](https://user-images.githubusercontent.com/67407393/209300944-ac2fb0dc-68f7-48a7-964b-15fb9ace1011.png)
 
+### Trading Edge Year Wise:
+
+![image](https://user-images.githubusercontent.com/67407393/209301071-2d8c3757-2dfc-4bc8-bc16-3a65a9441bcf.png)
