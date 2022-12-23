@@ -2,6 +2,7 @@
 {
 
 includeok = 0;
+//Last updated 24.11.2022
 
 if(Name() == "20MICRONS.EQ-NSE"){includeok = Datenum() >=1130717 AND Datenum() < 1130927;}
 if(Name() == "3IINFOTECH.EQ-NSE"){includeok = (Datenum() >=1091222 AND Datenum() < 1120928) OR (Datenum()>=1130621 AND Datenum() < 1130927);}
