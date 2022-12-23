@@ -11,13 +11,13 @@ Slippage: Matched with Live(take same for BT)
 Reference: Dropbox---> KavanRanking ---> Rankingsheets with Date(Rankingdate is one day prior to trade_Date)
 Excludeok Code: From 02-03-2022 onwards: []
 
-###Process: - 
+### Process: - 
 
 Step1: Generate Backtest ranking and then hit the backtest.  
 
 Step2: Match Trades: Match trade count and unique symbols for each day
 
-###Review:
+### Review:
 
 1. Only 60% trades are matching because of the Excludeok List(Stocks banned from trading by the broker): Lots of difference in the stocks placed
 
@@ -25,7 +25,7 @@ Step2: Match Trades: Match trade count and unique symbols for each day
 
 ![image](https://user-images.githubusercontent.com/67407393/209287776-c339438d-d8dc-4697-85da-e73084fb84ec.png)
 
-###Conclusion:
+### Conclusion:
 We have also done a backtets from "01-01-2013 to 24-11-2013". This backtest doesn't include the "NSE500 ExcludeOk" code as we dont have data on stocks
 which were excluded from trading on a day to day basis from 2013 onwards. As seen in the backtest, 2022 has not been particularly a great year for the "ATR Ranking"
 system. Nevertheless its been positive and similarly average performances were seen in a couple of earlier years. The ATRRanking System generally trades stocks 
