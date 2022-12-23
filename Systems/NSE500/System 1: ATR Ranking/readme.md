@@ -1,4 +1,4 @@
-## NSE500 ATRRanking Review:
+## NSE500 ATRRanking Review: 24.11.2022
 
 ### Introduction:-
 
