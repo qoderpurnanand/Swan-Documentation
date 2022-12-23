@@ -33,6 +33,7 @@ Overall Performance Drop has been seen in the system compared to the previous ye
 2. Reduction in Trading Edge
 3. Overall Trend Analysis shows a Smile: Stocks rising at EOD
 4. Excludeok does not make so much of a difference
+5. It has done worse then other ATR System maybe because of a later Entry Time
 
 #### Full Backtest without Excludeok
 ![image](https://user-images.githubusercontent.com/67407393/209301514-bf82fbb9-8dc3-44d1-8a07-f6d8a68b2901.png)
