@@ -1,0 +1,127 @@
+#include <NSE500 Includeok.afl>
+#include <NSE500 Excludeok.afl>
+
+stc = 1;//Optimize("stc",1,1,6,1);
+xtc = 1;//Optimize("xtc",1,1,6,1);
+
+rc = 9; //Optimize("rc",1,1,9,1); We are optimising other optimum values on 9 ranking combinations.
+
+// While Running Optimisations, ensure that all other factors are back to their base case scenario. Eg: If we are optimising Starttime, we need to ensure that the endtime and 
+
+lev = 1;
+
+maxpos = 30; //Optimize("maxpos",10,10,50,10);
+vp = 2;
+entfac = 0.15;//Optimize("entfac",1,1,3,1)/10;
+entfac2 = 0.15;//Optimize("entfac2",7,1,10,1)/10;
+stpfac = 0.4;//Optimize("stpfac",4,4,10,1)/10; 
+
+minvolume = 0;//10000000; // minimum value of shares that must be traded on any given day.
+volumemalb = 100;//volume moving avg lookback
+atrper = 2; //atr period
+
+starttime = 091500;//091959;
+Exttime = 151500;//151459;
+Stoptime = 120000;//115959;
+
+SetOption("InitialEquity",  10000000);
+SetOption("AccountMargin",1);
+SetOption("MaxOpenPositions",maxpos);
+SetPositionSize(100/maxpos*lev,spsPercentOfEquity);
+SetTradeDelays(0,0,0,0);
+SetOption("PriceBoundChecking",False);
+
+if(rc == 1)
+{
+	rankprefix = "~Rank30-50-20";
+}
+if(rc == 2)
+{
+	rankprefix = "~Rank40-30-30";
+}
+if(rc == 3)
+{
+	rankprefix = "~Rank40-40-20";
+}
+if(rc == 4)
+{
+	rankprefix = "~Rank50-30-20";
+}
+if(rc == 5)
+{
+	rankprefix = "~Rank50-40-10";
+}
+if(rc == 6)
+{
+	rankprefix = "~Rank50-50-00";
+}
+if(rc == 7)
+{
+	rankprefix = "~Combined Rank"; //40-50-10
+}
+if(rc == 8)
+{
+	rankprefix = "~Rank30-30-40"; 
+}
+
+if(rc == 9)
+{
+	rankprefix = "~~ATRRankingExcludeok"; 
+}
+
+TimeFrameSet(inDaily); //We want the volatility, entry trigger, value traded and vol ok for previous day and not previous bar, hence we use timeframeset
+vol = Ref(ATR(atrper),-1);
+enttrg = Ref(C,-1) + (vol * entfac);
+Valuetraded = MA((Ref(Avg,-1) * Ref(V,-1)),volumemalb) ;
+volOK = Valuetraded > minVolume;
+TimeFrameRestore();
+
+vol = TimeFrameExpand(vol,inDaily,expandFirst);
+enttrg = TimeFrameExpand(enttrg,inDaily,expandFirst);
+volOk = TimeFrameExpand(volOk,inDaily,expandFirst);
+Valuetraded = TimeFrameExpand(Valuetraded,inDaily,expandFirst);
+
+rank = Foreign(rankprefix+Name(),"X");
+
+lbd = DateNum() != Ref(DateNum(),1);
+
+stop = 4; //optimize("stop",4,4,6,1);
+
+enttrg2 = O + (Ref(ATR(vp),-1) * entfac2);
+
+Short = includeOK AND excludeOk == 0 AND H > enttrg AND rank <= maxpos AND TimeNum() <= Stoptime /*AND volok*/ AND TimeNum() >= starttime; 
+//ShortPrice = IIf(TimeNum() == starttime AND O > enttrg , IIf(H > enttrg2 , enttrg2 * 0.9998 , C * 0.999) , enttrg * 0.9998); //means start time can be not equal//we had earlier kept it as average of high and low, but changed it back to close, since our position size is not sufficient to slice of orders.
+ShortPrice = IIf(TimeNum() == starttime AND O > enttrg , IIf(H > enttrg2 , enttrg2  , C ) , enttrg);
+
+Cover = TimeNum() == Exttime;
+
+Short = ExRem(Short,Cover);
+Cover = ExRem(Cover,Short);
+
+stoplevel = ValueWhen(Short,ShortPrice) * (1 + (stop / 100));
+
+Cover = (Cover OR H >= stoplevel);// AND Short == 0; // 1 bar delay
+CoverPrice = IIf(H >= stoplevel , Max(Open,stoplevel),C);
+//CoverPrice = IIf(H >= stoplevel , Max(Open,stoplevel) * 1.001 , C* 1.001);
+
+//ApplyStop(stopTypeLoss,stopModePercent,stop);
+
+
+Filter = 1;///*includeok AND*/ TimeNum()==091500;//AND TimeNum() == 091959;
+AddColumn(rank, "Rank");
+//AddColumn(Close, "Close");
+/*
+AddColumn(vol,"Volatility");
+AddColumn(enttrg,"Entry Trigger");
+AddColumn(ShortPrice,"ShortPrice");
+AddColumn(O,"Open");
+AddColumn(includeok,"Includeok");
+AddColumn(Short,"Short");
+AddColumn(Cover,"Cover");
+AddColumn(CoverPrice,"CoverPrice");
+AddColumn(C,"Current Close");
+AddColumn(H,"High");
+AddColumn(volOk,"VolOK");
+AddColumn(ValueTraded,"Value Traded");
+AddColumn(prevvol,"Previous Volume");
+*/
