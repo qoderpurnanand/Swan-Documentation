@@ -1,6 +1,6 @@
-##NSE500 ATRRanking Review:
+## NSE500 ATRRanking Review:
 
-###Introduction:-
+### Introduction:-
 
 This is the review for the NSE500 ATRRanking System.The purpose for this review is that we want to compare the Live results with the Backtest
 Results. A system like NSE500 has a lot of moving parts due to which there can be several discrepancies between the Live and Backtest results,therefore the
