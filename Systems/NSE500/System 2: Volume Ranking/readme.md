@@ -29,13 +29,8 @@ Step2: Match Trades: Match trade count and unique symbols for each day
 
 ### Conclusion:
 We have also done a backtets from "01-01-2013 to 24-11-2013". This backtest doesn't include the "NSE500 ExcludeOk" code as we dont have data on stocks
-which were excluded from trading on a day to day basis from 2013 onwards. As seen in the backtest, 2022 has not been particularly a great year for the "ATR Ranking"
-system. Nevertheless its been positive and similarly average performances were seen in a couple of earlier years. The ATRRanking System generally trades stocks 
-which are a lot more volatile. Stocks that are banned from trading on any given day are the stocks which are volatile. This system breeds on volatility, so by not 
-getting an opportunity to trade such stocks, the live returns we get may never match the backtested returns unless the Historical Backtest is been done with the 
-Excludeok code which unfortunately we don not have.The last step we will adopt is to do a trend analysis with and without the "NSE500 ExcludeOk" code to see how stocks
+which were excluded from trading on a day to day basis from 2013 onwards. As seen in the backtest, 2022 has not been particularly a great year for the "Volume Ranking" system. Nevertheless its been positive and similarly average performances were seen in a couple of earlier years. However, our assumption is the "NSE500 ExcludeOk" code could be making a lot of difference similarly to the "ATR Ranking" System and that can also be seen while comparing the Backtests using the "NSE500 ExcludeOk" code and also without it from 10-05-2022 to 24-11-2022. The last step we will adopt is to do a trend analysis with and without the "NSE500 ExcludeOk" code to see how stocks have moved Intraday from 10-05-2022 to 24-11-2022. 
 
 
-It might be worthwhile to trade this sytem with another broker. 
            
                
