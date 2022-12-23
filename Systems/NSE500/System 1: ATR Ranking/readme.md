@@ -26,14 +26,15 @@ Step2: Match Trades: Match trade count and unique symbols for each day
 ![image](https://user-images.githubusercontent.com/67407393/209287776-c339438d-d8dc-4697-85da-e73084fb84ec.png)
 
 ### Conclusion:
-We have also done a backtets from "01-01-2013 to 24-11-2013". This backtest doesn't include the "NSE500 ExcludeOk" code as we dont have data on stocks
-which were excluded from trading on a day to day basis from 2013 onwards. As seen in the backtest, 2022 has not been particularly a great year for the "ATR Ranking"
-system. Nevertheless its been positive and similarly average performances were seen in a couple of earlier years. The ATRRanking System generally trades stocks 
-which are a lot more volatile. Stocks that are banned from trading on any given day are the stocks which are volatile. This system breeds on volatility, so by not 
-getting an opportunity to trade such stocks, the live returns we get may never match the backtested returns unless the Historical Backtest is been done with the 
-Excludeok code which unfortunately we don not have.The last step we will adopt is to do a trend analysis with and without the "NSE500 ExcludeOk" code to see how stocks
-
+1. Overall system has done better becuase of more volatile stocks and better entry time:09.15.00
+2. We were unable to match the system because of Ban List
+3. If tried with another broker we could do well
 
 It might be worthwhile to trade this sytem with another broker. 
            
-               
+### Full Backtest           
+![image](https://user-images.githubusercontent.com/67407393/209302167-4a41a4d4-a6a4-4cfc-adc7-e9395942c31a.png)
+           
+###Overall Trading Edge:
+![image](https://user-images.githubusercontent.com/67407393/209302394-32e2d93c-747d-4706-9690-b7b98604c0b5.png)
+
