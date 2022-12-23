@@ -2,7 +2,7 @@
 
 ### Introduction:-
 
-This is the review for the NSE500 ATRRanking System.The purpose for this review is that we want to compare the Live results with the Backtest
+This is the review for the NSE500 VolumeRanking System.The purpose for this review is that we want to compare the Live results with the Backtest
 Results. A system like NSE500 has a lot of moving parts due to which there can be several discrepancies between the Live and Backtest results,therefore the
 review of such a system is necessary.Following process has been adopted for the review.
 
@@ -28,8 +28,19 @@ Step2: Match Trades: Match trade count and unique symbols for each day
 ![image](https://user-images.githubusercontent.com/67407393/209291834-2e19299e-0b17-4bc4-9e4a-8bf9c9a97939.png)
 
 ### Conclusion:
-We have also done a backtets from "01-01-2013 to 24-11-2013". This backtest doesn't include the "NSE500 ExcludeOk" code as we dont have data on stocks
-which were excluded from trading on a day to day basis from 2013 onwards. As seen in the backtest, 2022 has not been particularly a great year for the "Volume Ranking" system. Nevertheless its been positive and similarly average performances were seen in a couple of earlier years. However, our assumption is the "NSE500 ExcludeOk" code could be making a lot of difference similarly to the "ATR Ranking" System and that can also be seen while comparing the Backtests using the "NSE500 ExcludeOk" code and also without it from 10-05-2022 to 24-11-2022. The last step we will adopt is to do a trend analysis with and without the "NSE500 ExcludeOk" code to see how stocks have moved Intraday from 10-05-2022 to 24-11-2022. 
+Overall Performance Drop has been seen in the system compared to the previous years:
+1. Curve Fitting of the system
+2. Reduction in Trading Edge
+3. Overall Trend Analysis shows a Smile: Stocks rising at EOD
+4. Excludeok does not make so much of a difference
+
+#### Full Backtest without Excludeok
+![image](https://user-images.githubusercontent.com/67407393/209301514-bf82fbb9-8dc3-44d1-8a07-f6d8a68b2901.png)
+
+#### Trading Edge Year Wise
+![image](https://user-images.githubusercontent.com/67407393/209301650-c5deaadc-39fb-4c99-bcdf-9dbe7d06f965.png)
+
+
 
 
            
