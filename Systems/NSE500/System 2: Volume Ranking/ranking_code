@@ -1,0 +1,171 @@
+maxpos = 30;//Optimize("maxpos",10,10,30,5); 
+
+//#include <NSE500 Includeok.afl>
+//#include <NSE500 Excludeok.afl>
+
+//Rankcase =1; //Optimize("Rankcase",1,1,3,1);
+//rn = 30;
+
+//minrank = IIf(rankcase == 1,0,IIf(rankcase == 2,rn, IIf(rankcase == 3,rn*2,IIf(rankcase == 4,rn*3,IIf(rankcase == 5,rn*4,IIf(rankcase == 6,rn*5,IIf(rankcase == 7,rn*6,IIf(rankcase == 8,rn*7,IIf(rankcase == 9,rn*8,IIf(rankcase == 10,rn*9, IIf(rankcase == 11,rn*10,null)))))))))));
+//maxrank = IIf(rankcase == 1,rn,IIf(rankcase == 2,rn*2, IIf(rankcase == 3,rn*3,IIf(rankcase == 4,rn*4,IIf(rankcase == 5,rn*5,IIf(rankcase == 6,rn*6,IIf(rankcase == 7,rn*7,IIf(rankcase == 8,rn*8,IIf(rankcase == 9,rn*9,IIf(rankcase == 10,rn*10, IIf(rankcase == 11,rn*11,null)))))))))));
+Cases = 3;
+
+if(Cases==1) { x1 = x2 = x3= x4= x5 =x6=x7=x8=1/8;}
+if(Cases==2) { x2 = x1= x3=1/3;x4=x5=x6=x7=x8=x9=0;}
+if(Cases==3) { x4=0.4;x1=x2=x3=0.2; x5=x6=x7=x8=0;}
+if(Cases==4) {x4=x5=x7=x8=1/4; x1=x2=x3=x6=0;}
+
+vp = 1;
+ef = 0.2;
+llb = 1;
+lev = 1;
+sp = 4;
+lb = 3;
+
+minvolume = 10000000;
+
+watchlist = 0;
+
+List = CategoryGetSymbols(categoryWatchlist,watchlist);
+ 
+if ( Status("stocknum") == 0 ) // Generate ranking when we are on the very first symbol
+{
+	StaticVarRemove( "values*" );
+
+	for ( n = 0; ( Symbol = StrExtract( List, n ) )  != "";  n++    )
+	{
+		SetForeign ( symbol );
+		#include <NSE500 Includeok.afl>
+        #include <NSE500 Excludeok.afl>
+
+		
+		Valuetraded = Ref(V*C,-1);
+		volOK = Valuetraded > minVolume;
+		 
+		 
+		 AtrPr=PercentRank(ATR(vp),100);
+		 MA_ATR=MA(ATR(vp)/Close,lb)*100;
+		 mb = MA(Volume,lb+1);
+		 Zscore = (Volume - mb) / (StDev(Volume,lb+1));
+		 atrc = (ATR(vp)/Close)*100;
+		 ROCvol = ROC(Volume,llb);
+		 ROCprice=(ROC(Close,lb));
+		 StDev1 = StDev(ROC(Close,lb),100,False);
+		 rsivol = RSIa(Volume,14);
+		 rocma = ROC(MA(Close,lb),lb);
+		 
+		
+		values1 = IIf(Includeok AND Excludeok == 0 AND Volok , Ref(MA_ATR,-1),Null);
+		values2 = IIf(Includeok AND Excludeok == 0 AND Volok, Ref(Stdev1,-1), Null);
+        values3 = IIf(Includeok AND Excludeok == 0 AND Volok , Ref(atrc,-1), Null);
+		values4 = IIf(Includeok AND Excludeok == 0 AND Volok, Ref(ROCvol,-1) , Null);
+		values5 = IIf(Includeok AND Excludeok == 0 AND Volok, Ref(Rocprice,-1) , Null);
+		values6 = IIf(Includeok AND Excludeok == 0 AND Volok, Ref(Zscore,-1) , Null);
+		values7 = IIf(Includeok AND Excludeok == 0 AND volok, Ref(Rsivol,-1) , Null);
+		Values8 = IIf(Includeok AND Excludeok == 0 AND Volok , Ref(rocma,-1) , Null);
+		
+		RestorePriceArrays();
+		
+		StaticVarSet("values1"+symbol, values1);
+		StaticVarSet("values2"+symbol, values2);
+		StaticVarSet("values3"+symbol, values3);
+		StaticVarSet("values4"+symbol, values4);
+		StaticVarSet("values5"+symbol, values5);
+		StaticVarSet("values6"+symbol, values6);
+		StaticVarSet("values7"+symbol, values7);
+		StaticVarSet("values8"+symbol, values8);
+		
+		
+		
+		_TRACE( symbol );
+     }
+
+	
+	StaticVarGenerateRanks("rank","Values1",0,1234);
+	StaticVarGenerateRanks("rank","Values2",0,1234);
+	StaticVarGenerateRanks("rank","Values3",0,1234);
+	StaticVarGenerateRanks("rank","Values4",0,1234);
+	StaticVarGenerateRanks("rank","Values5",0,1234);
+	StaticVarGenerateRanks("rank","Values6",0,1234);
+	StaticVarGenerateRanks("rank","Values7",0,1234);
+	StaticVarGenerateRanks("rank","Values8",0,1234);
+	
+}	
+
+symbol = Name();
+
+
+values1 = StaticVarGet("values1" + symbol);
+values2 = StaticVarGet("values2" + symbol);
+values3 = StaticVarGet("values3" + symbol);
+values4 = StaticVarGet("values4" + symbol);
+values5 = StaticVarGet("values5" + symbol);
+values6 = StaticVarGet("values6" + symbol);
+values7 = StaticVarGet("values7" + symbol);
+values8 = StaticVarGet("values8" + symbol);
+
+v1 = StaticVarGet("rankvalues1" + symbol);
+v2 = StaticVarGet("rankvalues2" + symbol);
+v3 = StaticVarGet("rankvalues3" + symbol);
+v4 = StaticVarGet("rankvalues4" + symbol);
+v5 = StaticVarGet("rankvalues5" + symbol);
+v6 = StaticVarGet("rankvalues6" + symbol);
+v7 = StaticVarGet("rankvalues7" + symbol);
+v8 = StaticVarGet("rankvalues8" + symbol); 
+ 
+if ( Status("stocknum") == 0 ) // Generate ranking when we are on the very first symbol
+{
+	//StaticVarRemove( "values*" );
+
+	for ( n = 0; ( Symbol = StrExtract( List, n ) )  != "";  n++    )
+	{
+		SetForeign ( symbol );
+		
+		symbol = Name();
+		
+		v1 = 10000 - StaticVarGet("rankvalues1"+symbol);
+		v2 = 10000 - StaticVarGet("rankvalues2"+symbol);
+		V3 = 10000 - StaticVarGet("rankvalues3"+symbol);
+		v4 = 10000 - StaticVarGet("rankvalues4"+symbol);
+		v5 = 10000 - StaticVarGet("rankvalues5"+symbol);
+		v6 = 10000 - StaticVarGet("rankvalues6"+symbol);
+		v7 = 10000 - StaticVarGet("rankvalues7"+symbol);
+		v8 = 10000 - StaticVarGet("rankvalues8"+symbol);
+		
+		values10 =  v1*X1 + v2*x2 +  v3*x3 + v4*x4 + v5*x5 + v6*x6 + v7*x7 + v8*x8;
+
+		RestorePriceArrays();
+		
+		StaticVarSet("values10"+symbol, values10);
+		_TRACE( symbol );
+     }
+
+	StaticVarGenerateRanks( "rank", "values10", 0, 1234 );
+}
+
+
+symbol = Name();
+
+#include <NSE500 Includeok.afl>
+#include <NSE500 Excludeok.afl>
+
+values10 = StaticVarGet ( "values10" +  symbol );
+rank = StaticVarGet ( "rankvalues10" +  symbol );
+//AddToComposite(rank,"~~VolRankingExcludeOK"+Name(),"x");
+
+StDev1 = Ref(StDev(ROC(Close,lb),100,False),-1);
+MA_ATR = Ref(MA(ATR(vp)/Close,lb)*100,-1);
+Atrc = Ref((ATR(vp)/Close)*100,-1);
+ROCvol = Ref(ROC(Volume,llb),-1);
+
+rankOK = rank <=  maxpos;// AND Rank > 10;
+
+Filter = 1;//includeok == 1;
+AddColumn(rank,"rank");
+//AddColumn(values10,"values10");
+AddColumn(Ref(Close,-1),"Close",1.2);
+AddColumn(MA_Atr,"MA_Atr");
+AddColumn(StDev1,"StDev1");
+AddColumn(atrc,"atrc");
+AddColumn(ROCvol,"ROCvol");
+
