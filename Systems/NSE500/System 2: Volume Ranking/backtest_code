@@ -1,0 +1,130 @@
+#include <NSE500 Includeok.afl>
+#include <NSE500 Excludeok.afl>
+
+stc = 1;//Optimize("stc",1,1,6,1);
+xtc = 1;//Optimize("xtc",1,1,3,1); //1; //Optimize("xtc",1,1,6,1);
+
+rc = 9; //Optimize("rc",1,1,9,1); //5; //Optimize("rc",1,1,9,1); // We are optimising other optimum values on 9 ranking combinations.//we always keep rank as 5 to 7 now on.
+
+// While Running Optimisations, ensure that all other factors are back to their base case scenario. Eg: If we are optimising Starttime, we need to ensure that the endtime and 
+
+lev = 1;
+
+maxpos = 30; //Optimize("maxpos",10,10,50,10)  ; // CRITICAL 1 //base scenario 10
+entfac = 2/10;//Optimize("entfac",1,1,3,1)/10 ; //0.2; //Optimize("entfac",1,1,3,1)/10 ;// CRITICAL 2 entry factor base scenario 0.1
+entfac2 = 1/10;//2/10;//Optimize("entfac2",7,1,10,1)/10;//0.8; //Optimize("entfac2",5,5,9,1)/10;
+stpfac = 0.7; //optimised Val 0.7//Optimize("stpfac",4,4,10,1)/10; // CRITICAL 3 stop factor //base scenario 0.4
+
+minvolume = 10000000; // minimum value of shares that must be traded on any given day.
+volumemalb = 100; //volume moving avg lookback
+atrper = 1; //atr period
+
+starttime = 092000;//Optimize("starttime",091959,091959,092959,500);//IIf(stc == 1 , 091959 , IIf(stc == 2 , 092459 , IIf(stc == 3 , 092959 , IIf(stc == 4 , 093459 , IIf(stc == 5 , 093959 , 094459))))); --> ideal scenario = 092459 ;base scenario = 091959// IMPORTANT time to enter trade
+Exttime = 152000;//IIf(xtc == 1 , 151459, IIf(xtc == 2 , 151959, 152459)) ;//152459; /*IIf(xtc == 1 , 145959 , IIf(xtc == 2 , 150459 , */IIf(xtc == 3 , 150959 , IIf(xtc == 4 , 151459, IIf(xtc == 5 , 151959, 152459))))); //--> ideal scenario = 152459; base scenario =151459// IMPORTANT time to exit trade
+Stoptime = 120000;//Optimize("stoptime",105959,95959,145959,10000);//115959; //Optimize("stoptime",105959,95959,145959,10000); // IMPORTANT time after which no trade can be opened.(105959 was earlier optimum, but optimising it again)
+
+SetOption("InitialEquity",1000000);
+SetOption("AccountMargin",100);
+SetOption("MaxOpenPositions",maxpos);
+SetPositionSize(100/maxpos*lev,spsPercentOfEquity);
+SetTradeDelays(0,0,0,0);
+SetOption("PriceBoundChecking",False);
+
+TimeFrameSet(inDaily); //We want the volatility, entry trigger, value traded and vol ok for previous day and not previous bar, hence we use timeframeset
+vol = Ref(ATR(atrper),-1);
+enttrg = Ref(C,-1) + (vol * entfac);
+Valuetraded = MA((Ref(Avg,-1) * Ref(V,-1)),volumemalb) ;
+volOK = Valuetraded > minVolume;
+//rank= Foreign("~~System3rank"+Name(),"c");
+TimeFrameRestore();
+
+vol = TimeFrameExpand(vol,inDaily,expandFirst);
+enttrg = TimeFrameExpand(enttrg,inDaily,expandFirst);
+volOk = TimeFrameExpand(volOk,inDaily,expandFirst);
+Valuetraded = TimeFrameExpand(Valuetraded,inDaily,expandFirst);
+//rank=TimeFrameExpand(rank,inDaily,expandLast);
+
+if(rc == 1)
+{
+	rankprefix = "~Rank30-50-20";
+}
+if(rc == 2)
+{
+	rankprefix = "~Rank40-30-30";
+}
+if(rc == 3)
+{
+	rankprefix = "~Rank40-40-20";
+}
+if(rc == 4)
+{
+	rankprefix = "~Rank50-30-20";
+}
+if(rc == 5)
+{
+	rankprefix = "~Rank50-40-10";
+}
+if(rc == 6)
+{
+	rankprefix = "~Rank50-50-00";
+}
+if(rc == 7)
+{
+	rankprefix = "~Combined Rank"; //40-50-10
+}
+if(rc == 8)
+{
+	rankprefix = "~Rank30-30-40"; 
+}
+if(rc == 9)
+{
+	rankprefix = "~~VolRankingExcludeOk"; 
+}
+
+
+//lbd = DateNum() != Ref(DateNum(),1);
+rank = Foreign(rankprefix+Name(),"X");
+//pdrank = ValueWhen(lbd,rank);
+pdrank=rank;
+
+stop = 4; //optimize("stop",4,4,6,1); //6; //optimize("stop",4,4,8,1); //6; //optimize("stop",6,3,10,1); //vol * stpfac;
+
+enttrg2 = O + (Ref(ATR(1),-1) * entfac2);
+
+Short = includeOK AND excludeok == 0 AND H > enttrg AND pdrank>=1 AND pdrank <= maxpos AND TimeNum() <= Stoptime/*AND volok*/ AND TimeNum() >= starttime; 
+ShortPrice = IIf(TimeNum() == starttime AND O > enttrg , IIf(H > enttrg2 , enttrg2 , C ) , enttrg ); //means start time can be not equal//we had earlier kept it as average of high and low, but changed it back to close, since our position size is not sufficient to slice of orders.
+
+Cover = TimeNum() == Exttime;
+
+Short = ExRem(Short,Cover);
+Cover = ExRem(Cover,Short);
+
+stoplevel = ValueWhen(Short,ShortPrice) * (1 + (stop / 100));
+
+Cover = (Cover OR H >= stoplevel) AND Short == 0; // 1 bar delay
+CoverPrice = IIf(H >= stoplevel , Max(Open,stoplevel) , C  );
+
+//ApplyStop(stopTypeLoss,stopModePercent,stop);
+
+//prevcl = TimeFrameGetPrice("C",inDaily,-1);
+//prevvol = TimeFrameGetPrice("Volume",inDaily,-1);
+
+Filter = includeok AND TimeNum() == 091959;
+AddColumn(rank,"rank");
+/*
+AddColumn(vol,"Volatility");
+AddColumn(prevcl,"PrevClose");
+AddColumn(enttrg,"Entry Trigger");
+AddColumn(ShortPrice,"ShortPrice");
+AddColumn(O,"Open");
+AddColumn(rank, "Rank");
+AddColumn(includeok,"Includeok");
+AddColumn(Short,"Short");
+AddColumn(Cover,"Cover");
+AddColumn(CoverPrice,"CoverPrice");
+AddColumn(C,"Current Close");
+AddColumn(H,"High");
+AddColumn(volOk,"VolOK");
+AddColumn(ValueTraded,"Value Traded");
+AddColumn(prevvol,"Previous Volume");
+*/
