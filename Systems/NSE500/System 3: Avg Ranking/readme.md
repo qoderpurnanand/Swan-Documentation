@@ -11,6 +11,7 @@ Period: 05.04.2022 - 24.11.2022
 Slippage: Matched with Live(take same for BT)
 Reference: Dropbox---> KavanRanking ---> Rankingsheets with Date(Rankingdate is one day prior to trade_Date)
 Excludeok Code: From 02-03-2022 onwards: [Excludeok](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Systems/NSE500/nse500_excludeok_24.11.2022)
+Entry Time: 09.20
 
 ### Process: - 
 
@@ -32,7 +33,8 @@ Reasons for bad results:
 1. Curve Fitting
 2. Extremely Thin Trading Edge
 3. Trend Analysis shows a smile: So stocks on an overall basis are rising up by end of day 
-4. 2017 was one of the years when the results were not so good, but otherwise 
+4. 2017 was one of the years when the results were not so good, but otherwise
+5. This system could have done the worst because of the last 09.20 entry time
 
 
 Entire Backtest since Inception: Without Excludeok: Volume Ranking
