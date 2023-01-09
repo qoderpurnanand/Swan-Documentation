@@ -1,6 +1,6 @@
 ## F&O BanList
 
-Excel Sheet Reference - [F&O BanList](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/BanList/Ban%20List%20Code%202022.06.30.xlsm)
+Excel Sheet Reference - [F&O BanList](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/BanList/Ban%20List%20Code.xlsm)
 
    if(Name() == "ADLABSFILM.FUT" or Name() == "ADLABSFILM.FUT1" or Name() == "ADLABSFILM.EQ-NSE"){ excludeOK = DateNum() == 1080101 OR DateNum() == 1080108  OR DateNum() == 1080109  OR DateNum() == 1080110  OR DateNum() == 1080111  OR DateNum() == 1080114  OR DateNum() == 1080115  OR DateNum() == 1080116  OR DateNum() == 1080117  OR DateNum() == 1080118  OR DateNum() == 1080121 ; }																							
 if(Name() == "ARVINDMILL.FUT" or Name() == "ARVINDMILL.FUT1" or Name() == "ARVINDMILL.EQ-NSE"){ excludeOK = DateNum() == 1080101 OR DateNum() == 1080102  OR DateNum() == 1080103  OR DateNum() == 1080104  OR DateNum() == 1080107  OR DateNum() == 1080108  OR DateNum() == 1080109  OR DateNum() == 1080110  OR DateNum() == 1080111  OR DateNum() == 1080114  OR DateNum() == 1080115 ; }																							
