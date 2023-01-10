@@ -2,7 +2,7 @@
 
 Excel sheet for reference - [F&O IncludeOK](https://github.com/qodeinvestcments/Swan-Documentation/blob/main/Database%20Maintenance/F%26O%20IncludeOK/IncludeOK_FO%20Equity%20Daily.xlsx)
 
-    if(Name() == "3IINFOTECH.EQ-NSE") { includeOK = (DateNum() >= 1070905 AND DateNum() < 1090626) OR (DateNum() >= 1101029 AND DateNum() < 1120224); }
+if(Name() == "3IINFOTECH.EQ-NSE") { includeOK = (DateNum() >= 1070905 AND DateNum() < 1090626) OR (DateNum() >= 1101029 AND DateNum() < 1120224); }
 if(Name() == "ABAN.EQ-NSE") { includeOK = DateNum() >= 1061229 AND DateNum() < 1120928; }
 if(Name() == "ABB.EQ-NSE") { includeOK = (DateNum() >= 1061229 AND DateNum() < 1130201) OR (DateNum() >= 1220128); }
 if(Name() == "ABGSHIP.EQ-NSE") { includeOK = (DateNum() >= 1080821 AND DateNum() < 1090504) OR (DateNum() >= 1100625 AND DateNum() < 1120629); }
@@ -19,7 +19,7 @@ if(Name() == "AKRUTI.EQ-NSE") { includeOK = DateNum() >= 1080821 AND DateNum() <
 if(Name() == "ALBK.EQ-NSE") { includeOK = DateNum() >= 1061229 AND DateNum() < 1190628; }
 if(Name() == "ALOKTEXT.EQ-NSE") { includeOK = (DateNum() >= 1061229 AND DateNum() < 1090626) OR (DateNum() >= 1101029 AND DateNum() < 1121130); }
 if(Name() == "ALSTOMT_D.EQ-NSE") { includeOK = DateNum() >= 1100219 AND DateNum() < 1120427; }
-if(Name() == "AMARAJABAT.EQ-NSE") { includeOK = DateNum() >= 1150529; }
+if(Name() == "AMARAJABAT.EQ-NSE") { includeOK = DateNum() >= 1150529 AND DateNum() < 1221230; }
 if(Name() == "AMBUJACEM.EQ-NSE") { includeOK = DateNum() >= 1070724; }
 if(Name() == "AMTEKAUTO.EQ-NSE") { includeOK = (DateNum() >= 1061229 AND DateNum() < 1090626) OR (DateNum() >= 1141128 AND DateNum() < 1151030); }
 if(Name() == "ANDHRABANK.EQ-NSE") { includeOK = DateNum() >= 1061229 AND DateNum() < 1180927; }
@@ -137,7 +137,7 @@ if(Name() == "GRANULES.EQ-NSE") { includeOK = DateNum() >= 1160226 AND DateNum()
 if(Name() == "GRASIM.EQ-NSE") { includeOK = DateNum() >= 1061229; }
 if(Name() == "GSFC.EQ-NSE") { includeOK = DateNum() >= 1170428 AND DateNum() < 1190628; }
 if(Name() == "GSKCONS.EQ-NSE") { includeOK = DateNum() >= 1131003 AND DateNum() < 1140530; }
-if(Name() == "GSPL.EQ-NSE") { includeOK = (DateNum() >= 1080821 AND DateNum() < 1131101) OR (DateNum() >= 1211029); }
+if(Name() == "GSPL.EQ-NSE") { includeOK = (DateNum() >= 1080821 AND DateNum() < 1131101) OR (DateNum() >= 1211029 AND DateNum() < 1221124); }
 if(Name() == "GTL.EQ-NSE") { includeOK = DateNum() >= 1061229 AND DateNum() < 1110930; }
 if(Name() == "GTLINFRA.EQ-NSE") { includeOK = DateNum() >= 1080821 AND DateNum() < 1110826; }
 if(Name() == "GTOFFSHORE.EQ-NSE") { includeOK = DateNum() >= 1071130 AND DateNum() < 1120127; }
@@ -244,7 +244,7 @@ if(Name() == "MFSL.EQ-NSE") { includeOK = (DateNum() >= 1101029 AND DateNum() < 
 if(Name() == "MGL.EQ-NSE") { includeOK = DateNum() >= 1170428; }
 if(Name() == "MIC.EQ-NSE") { includeOK = DateNum() >= 1080821 AND DateNum() < 1081226; }
 if(Name() == "MICO.EQ-NSE") { includeOK = DateNum() >= 1071130 AND DateNum() < 1080228; }
-if(Name() == "MINDTREE.EQ-NSE") { includeOK = (DateNum() >= 1080821 AND DateNum() < 1090626) OR (DateNum() >= 1140910); }
+if(Name() == "MINDTREE.EQ-NSE") { includeOK = (DateNum() >= 1080821 AND DateNum() < 1090626) OR (DateNum() >= 1140910 AND DateNum() < 1221122); }
 if(Name() == "MLL.EQ-NSE") { includeOK = DateNum() >= 1080821 AND DateNum() < 1111208; }
 if(Name() == "MONNETISPA.EQ-NSE") { includeOK = DateNum() >= 1080821 AND DateNum() < 1090626; }
 if(Name() == "MOSERBAER.EQ-NSE") { includeOK = DateNum() >= 1070511 AND DateNum() < 1111026; }
@@ -339,7 +339,7 @@ if(Name() == "SOUTHBANK.EQ-NSE") { includeOK = (DateNum() >= 1110718 AND DateNum
 if(Name() == "SREINFRA.EQ-NSE") { includeOK = (DateNum() >= 1101029 AND DateNum() < 1120928) OR (DateNum() >= 1170630 AND DateNum() < 1190228); }
 if(Name() == "SREINTFIN.EQ-NSE") { includeOK = DateNum() >= 1080821 AND DateNum() < 1090626; }
 if(Name() == "SRF.EQ-NSE") { includeOK = (DateNum() >= 1061229 AND DateNum() < 1090626) OR (DateNum() >= 1150529); }
-if(Name() == "SRTRANSFIN.EQ-NSE") { includeOK = DateNum() >= 1100730; }
+if(Name() == "SRTRANSFIN.EQ-NSE") { includeOK = DateNum() >= 1100730 AND DateNum() < 1221220; }
 if(Name() == "STAR.EQ-NSE") { includeOK = (DateNum() >= 1061229 AND DateNum() < 1090626) OR (DateNum() >= 1141128 AND DateNum() < 1191031) OR (DateNum() >= 1210730 AND DateNum() < 1220630) ; }
 if(Name() == "STER.EQ-NSE") { includeOK = DateNum() >= 1061229 AND DateNum() < 1130827; }
 if(Name() == "STERLINBIO.EQ-NSE") { includeOK = DateNum() >= 1070511 AND DateNum() < 1110527; }
@@ -448,5 +448,7 @@ if(Name() == "HINDCOPPER.EQ-NSE") { includeOK = DateNum() >= 1211231; }
 if(Name() == "HONAUT.EQ-NSE") { includeOK = DateNum() >= 1211231; }
 if(Name() == "RAIN.EQ-NSE") { includeOK = DateNum() >= 1211231; }
 if(Name() == "INTELLECT.EQ-NSE") { includeOK = DateNum() >= 1220128; }
-if(Name() == "ZYDUSLIFE.EQ-NSE") { includeOK = DateNum() >= 1220401; }
+if(Name() == "ZYDUSLIFE.EQ-NSE") { includeOK = DateNum() >= 1220307; }
+if(Name() == "SHRIRAMFIN.EQ-NSE") { includeOK = DateNum() >= 1221220; }
+if(Name() == "LTIM.EQ-NSE") { includeOK = DateNum() >= 1221205; }
 
