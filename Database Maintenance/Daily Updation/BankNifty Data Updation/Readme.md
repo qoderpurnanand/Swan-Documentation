@@ -11,6 +11,6 @@
  3. These files are stored locally (daily gets modified) in the system and updated to the database.
  4. If the number of rows present in these files do not match the number of rows being added to Postgres database, an error is thrown.
  5. In such a case, we delete entries for that particular date and run the updation code again.
- 6. The updation code for BankNifty Monthly Contracts is given here - [Updation Code](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/Daily%20Updation/BankNifty%20Data%20Updation/BankNiftyDailyUpdation.py) and the deletion code for the same is given here [Deletion Code](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/Daily%20Updation/BankNifty%20Data%20Updation/DeleteBNData.py)
+ 6. The **Updation Code** for BankNifty Monthly Contracts is given here - [Updation Code](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/Daily%20Updation/BankNifty%20Data%20Updation/BankNiftyDailyUpdation.py) and the **Deletion Code** for the same is given here [Deletion Code](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/Daily%20Updation/BankNifty%20Data%20Updation/DeleteBNData.py)
 
 **NOTE - The updation and deletion codes are the same; the only difference being the table and schema name.**
