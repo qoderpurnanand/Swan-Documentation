@@ -1,1 +1,189 @@
-add data
+#This code checks for daily corporate actions for NSE500 and FOlist and also checks for any kind of name changes in the stock names
+
+import pandas as pd
+import requests
+import urllib
+from datetime import datetime, date
+import numpy as np
+
+
+try:
+   Corporate_Actions_Check = 'https://www1.nseindia.com/corporates/datafiles/CA_ALL_FORTHCOMING.csv'
+   a = urllib.request.urlopen(Corporate_Actions_Check)
+except:
+    print("Corporate_Actions_Check", Corporate_Actions_Check)
+   
+else:
+
+
+    myfile = a.read()
+   
+   
+    df1=pd.read_csv(Corporate_Actions_Check)
+    print(Corporate_Actions_Check)
+       
+       
+    x = df1.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\CA.csv')
+    
+    
+    #print(df1)
+    
+    df1 = pd.read_csv(Corporate_Actions_Check)
+    #print(df1)
+  ############################################################################################################
+
+try:
+   NSE500_List = 'https://archives.nseindia.com/content/indices/ind_nifty500list.csv'
+   b = urllib.request.urlopen(NSE500_List)
+except:
+    print("NSE500_List", NSE500_List)
+   
+else:
+
+
+    myfile1 = b.read()
+   
+   
+    df2=pd.read_csv(NSE500_List)
+    print(NSE500_List)
+       
+       
+    df2.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\NSE500List.csv') 
+    
+    #print(df2)
+    
+    df2 = pd.read_csv(NSE500_List)
+    #print(df2)
+    
+  ############################################################################################################
+
+try:
+   FO_List = 'https://archives.nseindia.com/content/fo/fo_mktlots.csv'
+   c = urllib.request.urlopen(FO_List)
+except:
+    print("FO_List", FO_List)
+   
+else:
+
+
+    myfile2 = c.read()
+   
+   
+    df3=pd.read_csv(FO_List)
+    print(FO_List)
+       
+       
+    df3.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\FOList.csv')  
+   
+    #print(df3)
+    
+    df3 = pd.read_csv(FO_List)
+    #print(df3)
+    
+    
+    #print(df3)
+    
+    df3.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\FOList.csv')
+    
+    df3 = df3.rename(columns = {'SYMBOL    ':'Symbol'})
+    
+    df3.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\FOList.csv')
+    
+    #print(df3)
+    
+    print("")
+    print("                        NSE500 CORPORATE ACTIONS CHECK")
+    print("")
+    
+ ############################################################################################################    
+ 
+    inner_join = pd.merge(df1, 
+                      df2, 
+                      on ='Symbol', 
+                      how ='inner')
+    
+    #NSE500Check = print(inner_join)
+    NSE500Check = print(inner_join[['Symbol','Purpose','Ex-Date']])
+    
+    test = pd.DataFrame(inner_join, columns= ['Purpose'])
+    left = test['Purpose'].str[:7]
+    #print(left)
+    
+    s = left ==  "Interim"
+    #print(s)
+    
+    print("")
+    print("                        F/O CORPORATE ACTIONS CHECK")
+    print("")
+    
+    inner_join2 = pd.merge(df1, 
+                      df3, 
+                      on ='Symbol', 
+                      how ='inner')
+    #FOCheck = print(inner_join2)
+    FOCheck = print(inner_join2[['Symbol','Purpose','Ex-Date']])
+    
+    print("")
+    print("")
+    
+    
+ ############################################################################################################    
+    
+try:
+   Namechange = 'https://www1.nseindia.com/content/equities/namechange.csv'
+   e = urllib.request.urlopen(Namechange)
+except:
+    print("Namechange", Namechange)
+   
+else:
+
+
+    myfile5 = e.read()
+   
+   
+    df6=pd.read_csv(Namechange, encoding='latin1')
+    print(Namechange)
+       
+       
+    df6.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\Namechange.csv')
+    
+    print("")
+    print("                            NAME CHANGE CHECK")
+    print("")
+   
+    #print(df6)
+    
+    df6 = pd.read_csv(Namechange, encoding='latin1',parse_dates=[' NCH_DT'],dayfirst=True)
+    
+    #print(df6)
+    
+    #t = date.today()
+    #print(t)
+    
+    df6 = df6.rename(columns = {' NCH_DT':'Date'})
+    df6 = df6.rename(columns = {'NCH_SYMBOL':'Symbol'})
+    df6 = df6.rename(columns = {' NCH_NEW_NAME':'New Name'})
+    
+    df6.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\Namechange.csv')
+    
+    #print(df6)
+    #print(type(df6['Date'][0]))
+    
+    #date_time_str = df6['Date']
+
+    #date_time_obj = datetime.strptime(date_time_str, '%d/%m/%y %H:%M:%S')
+
+
+    #print ("The type of the date is now",  type(date_time_obj))
+    #print ("The date is", date_time_obj)
+    
+    
+    
+    #most_recent_date = df6['Date'].max()
+    #print(most_recent_date)
+    
+    x = df6.sort_values(by='Date',ascending=False)
+    #print(x)
+    
+    Change = x[['Symbol','New Name','Date']].head(5)
+    print(Change)
