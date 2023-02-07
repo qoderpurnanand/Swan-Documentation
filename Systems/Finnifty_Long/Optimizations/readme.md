@@ -6,6 +6,6 @@
 
 We ran backtests using different Input Values on all 3 Indices to combine them. Following are the different combinations:
 
-![This is an image](Systems/Finnifty_Long/Optimizations/Picture1.emf)
+
 
 
