@@ -1,4 +1,4 @@
-#This code checks for daily corporate actions for NSE500 and FOlist and also checks for any kind of name changes in the stock names
+#This code checks for daily corporate actions for NSE500, QGF and FOlist and also checks for any kind of name changes in the stock names
 
 import pandas as pd
 import requests
@@ -126,6 +126,26 @@ else:
     print("")
     print("")
     
+ ############################################################################################################
+    print("")
+    print("                        QGF CORPORATE ACTIONS CHECK")
+    print("")
+    
+    #qgf = 'C:\\Users\\Admin\\Dropbox\\Prop Book\\Daily Checks\\Corporate Actions Check\\QGF.csv'
+    
+    #df8 =pd.read_csv(qgf)
+    
+    qgf = pd.read_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Corporate Actions Check\QGF.csv')
+    
+    inner_join8 = pd.merge(df1, 
+                      qgf, 
+                      on ='Symbol', 
+                      how ='inner')
+    #FOCheck = print(inner_join2)
+    QGFCheck = print(inner_join8[['Symbol','Purpose','Ex-Date']])
+    
+    print("")
+    print("")
     
  ############################################################################################################    
     
