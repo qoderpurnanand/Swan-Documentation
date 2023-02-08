@@ -1,0 +1,314 @@
+This code checks if the Ranking for NSE500 system is appropriate and does not have any kind of symbol changes because of, change is stock list, MIS List on zerodha or the Circuit Limits.
+
+from datetime import date
+from datetime import timedelta
+import pandas as pd
+import numpy as np
+import gspread
+from csv import DictWriter
+import urllib
+import re,datetime
+import zipfile
+import glob
+import os
+
+                                       #Bhavcopy, Price bands, Nse500 List Download
+from datetime import datetime
+x = datetime.today().strftime('%A')
+
+y = 'Monday'
+#In the above condition, we are checking if day = Monday, for it to download the previous day Bhavcopy, considering Sat and Sun as Holiday. 
+
+#print(x)
+#print(y)
+
+if x == y:
+    start_date = date.today() - timedelta(days = 3) #Year-month-day
+    end=date.today() - timedelta(days = 3)
+    #print(start_date)
+    #print(end)
+elif x != y:
+    start_date = date.today() - timedelta(days = 1) #Year-month-day
+    end=date.today() - timedelta(days = 1)
+    #print(start_date)
+    #print(end)
+    
+df1=pd.DataFrame()
+#start_date = date(2022,5,30) #Year-month-day . Yesterday's date
+#end=date(2022,5,30)
+#We are dowloading the previous day bhavcopy to compare the close prices of the NSE500 Stock list.
+for n in range(int((end - start_date).days)+1):
+   
+
+  #input date and link
+  end_date = start_date+timedelta(n)
+  print(end_date)
+  newformat = end_date.strftime("%d%m%Y")
+  print(newformat)
+  finalformat = end_date.strftime("%d%b%Y").upper()
+  print(finalformat)
+  year = end_date.strftime("%Y")
+  print(year)
+  month = end_date.strftime("%b").upper()
+  print(month)
+  date = end_date.strftime("%d")
+  print(date)
+  try:
+   link = 'https://www1.nseindia.com/content/historical/EQUITIES/'+year+'/'+month+'/cm'+finalformat+'bhav.csv.zip'
+   f = urllib.request.urlopen(link)
+  except:
+        print("link", link)
+        continue
+  else:
+
+
+    myfile = f.read()
+   
+   
+    df=pd.read_csv(link)
+    print(link)
+    df['date'] = end_date
+   
+    df.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Nse 500 Check\Bhavcopycheck.csv')
+#We are extracting the downloaded Bhavcopy file into a new CSV in the given file location above.1   
+
+       
+try:
+   link1 = 'https://www1.nseindia.com/content/indices/ind_nifty500list.csv'
+   g = urllib.request.urlopen(link1)
+except:
+    print("link1", link1)
+   
+else:
+
+
+    myfile1 = g.read()
+   
+   
+    df1=pd.read_csv(link1)
+    print(link1)
+       
+       
+    df1.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Nse 500 Check\NSE500.csv')
+   
+
+   
+try:
+   link2 = 'https://archives.nseindia.com/content/equities/sec_list.csv'
+   h = urllib.request.urlopen(link1)
+except:
+    print("link2", link2)
+   
+else:
+
+
+    myfile2 = h.read()
+   
+   
+    df2=pd.read_csv(link2)
+    print(link2)
+       
+       
+    df2.to_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Nse 500 Check\Pricebands.csv')
+    
+############################################################################################
+                            #NSE500 Close check with Previous Day Bhavcopy Close
+import win32com.client
+
+df3 = pd.read_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Nse 500 Check\Bhavcopycheck.csv')
+
+df3 = df3[df3['SERIES'] == 'EQ']
+#print(df3)
+
+
+todaydates= datetime.today().strftime('%Y.%m.%d')
+#print(todaydates)
+
+checksheet = r'C:\\Users\Admin\Dropbox\Prop Book\Ranking\Check '+todaydates+'.xlsm'
+
+
+# Opening Excel software using the win32com
+File = win32com.client.Dispatch("Excel.Application")
+
+# Optional line to show the Excel software
+#File.Visible = 1
+
+# Opening your workbook
+Workbook = File.Workbooks.open(checksheet)
+
+# Refeshing all the shests
+Workbook.RefreshAll()
+
+# Saving the Workbook
+Workbook.Save()
+
+# Closing the Excel File
+File.Quit()
+
+df4 = pd.read_excel(checksheet,sheet_name="NSE500", skiprows=[0])
+df4.rename(columns={'Unnamed: 0':'SYMBOL'}, inplace=True)
+#print(df4)
+
+new_df = df3[['SYMBOL','CLOSE']].merge(df4[['SYMBOL', ' Close']], on=['SYMBOL'], how='right')
+
+new_df['Check'] = np.where(new_df['CLOSE'] == new_df[' Close'],0,1)
+#print(new_df)
+
+#print(new_df[new_df['Check'] == 1])
+
+#############################################################################################
+                          #NSE Ranking check with NSE500 Symbol List
+
+df5 = pd.read_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Nse 500 Check\NSE500.csv')
+
+Ranking = r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\OnlineCheck.xlsx'
+df6 = pd.read_excel(Ranking)
+
+
+#print(df5)
+#print(df6)
+
+
+sum = 0
+for i in df6['NSE5009.15']:
+    if i in list(df1['Symbol']):
+        sum += 1
+       
+print("NSE 500 List 9:15 check:", sum)
+
+sum1 = 0
+for i in df6['NSE5009.20']:
+    if i in list(df1['Symbol']):
+        sum1 += 1
+       
+print("NSE 500 List 9:20 check:", sum1)
+
+sum4 = 0
+for i in df6['NSE5009.17']:
+    if i in list(df1['Symbol']):
+        sum4 += 1
+       
+print("NSE 500 List 9:17 check:", sum4)
+
+print("")
+print("")
+
+##########################################################################################
+                          #NSE Ranking check with Zerodha MIS List
+    
+gc = gspread.service_account(filename='C:/Users/Admin/Desktop/client_secret.json')
+
+sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1fLTsNpFJPK349RTjs0GRSXJZD-5soCUkZt9eSMTJ2m4/edit#gid=288818195")
+
+worksheet = sh.get_worksheet(0)
+records_data=worksheet.col_values(2)
+records_df = pd.DataFrame.from_dict(records_data)
+
+#print(records_df)
+
+df7 = records_df.drop([0,1,2])
+#print(df1)
+
+df10 = df1.rename(columns={0 : 'Symbol'})
+#print(df4)
+
+Ranking = r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\OnlineCheck.xlsx'
+df8 = pd.read_excel(Ranking)
+
+#print(df2)
+
+df9 = df8.rename(columns={'NSE5009.15' : 'Symbol'})
+#print(df3)
+
+sum2 = 0
+for i in df9['Symbol']:
+    if i in list(df10['Symbol']):
+        sum2 += 1
+    else:
+        print("Check For Symbol- 9:15: ",i)
+
+print("9:15",sum2)        
+
+df11 = df8.rename(columns={'NSE5009.20' : 'Symbol'})  
+#print(df11)
+
+sum3 = 0
+for i in df11['Symbol']:
+    if i in list(df10['Symbol']):
+        sum3 += 1
+    else:
+        print("Check For Symbol- 9:20: ",i)
+
+print("9:20",sum3)
+
+df17 = df8.rename(columns={'NSE5009.17' : 'Symbol'})  
+#print(df17)
+
+sum6 = 0
+for i in df17['Symbol']:
+    if i in list(df10['Symbol']):
+        sum6 += 1
+    else:
+        print("Check For Symbol- 9:17: ",i)
+
+print("9:17",sum6)
+
+##########################################################################################
+
+df12 = pd.read_csv(r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\Nse 500 Check\Pricebands.csv')
+
+Ranking = r'C:\Users\Admin\Dropbox\Prop Book\Daily Checks\OnlineCheck.xlsx'
+df13 = pd.read_excel(Ranking)
+
+
+#print(df12)
+#print(df13)
+
+
+df14 = df13.rename(columns={'NSE5009.15' : 'Symbol'})
+
+
+new_df2 = df14.merge(df12[['Symbol', 'Band']], on='Symbol', how='left')
+
+#print(new_df2)
+
+df15 = df13.rename(columns={'NSE5009.20' : 'Symbol'})
+
+
+new_df3 = df15.merge(df12[['Symbol', 'Band']], on='Symbol', how='left')
+
+
+df18 = df13.rename(columns={'NSE5009.17' : 'Symbol'})
+
+
+new_df5 = df18.merge(df12[['Symbol', 'Band']], on='Symbol', how='left')
+
+#print(new_df3)
+
+new_df2['Check'] = np.where((new_df2['Band'] == '20') | (new_df2['Band'] == 'No Band'), 0, 1)
+
+#print(new_df2)
+
+
+print()
+
+new_df3['Check'] = np.where((new_df3['Band'] == '20') | (new_df3['Band'] == 'No Band'), 0, 1)
+
+#print(new_df3)
+
+new_df5['Check'] = np.where((new_df5['Band'] == '20') | (new_df5['Band'] == 'No Band'), 0, 1)
+
+print()
+
+Total = new_df2['Check'].sum()
+print("Total changes in price band 9:15 system:",Total)
+
+print()
+
+Total1 = new_df3['Check'].sum()
+print("Total changes in price band 9:20 system:",Total1)
+
+print()
+
+Total2 = new_df5['Check'].sum()
+print("Total changes in price band 9:17 system:",Total2)
