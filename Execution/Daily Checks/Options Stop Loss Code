@@ -1,0 +1,192 @@
+This code checks for all the Intraday Short options stop losses for both call and put, and it detects an error if the stop loss that has to be hit is not executed.
+
+
+#Import all the required files
+import pandas as pd
+import numpy as np
+from kiteconnect import KiteConnect
+from datetime import date
+from collections import Counter
+import datetime
+import os
+import time
+import pymsgbox
+from playsound import playsound
+from IPython.display import display
+from ib_insync import util
+from ib_insync import Option
+from ib_insync import Contract
+import asyncio
+import nest_asyncio
+from ib_insync import IB
+import random
+from ib_insync import *
+import datetime
+from IPython.display import clear_output
+
+
+async def main():
+
+    ib = IB()
+    ib.disconnect()
+    #util.startLoop()  # uncomment this line when in a notebook
+   
+    clientid= random.randint(1,10000)
+    await ib.connectAsync('127.0.0.1',7496,clientid)  #Connect IB
+     
+    now = datetime.datetime.now()
+    now = now.strftime("%I %M")
+   
+    z = now
+    #print(z < "15 30")
+    c = 1
+    #print(z)
+    while z < "15 30 PM":
+        #clear_output(wait=True)
+    #while c <= 1:    
+        ShortOptionsList=['BNSID1','BNSID2','BNSID3','BNSID4','BNSID5','BNSID6','BNSID7','BNSID8','BNSID9','BNSID10','BNSID11','NIFTYSID1','NIFTYSID2','NIFTYSID3','NIFTYSID4','NIFTYSID5','NIFTYSID6','NIFTYSID7','NIFTYSID8','NIFTYSID9','NIFTYSID10','NIFTYSID11']
+
+        #ShortOptionsTime=['04:15:00','04:30:00']#,'04:45:00','05:15:00','05:45:00','06:15:00','06:32:00','06:45:00','04:15;00','04:30:00','04:45:00','05:15:00','05:45:00','06:15:00','06:32:00','06:45:00']
+        ShortOptionsset=set(ShortOptionsList)
+       
+        EUdf="C:\\Users\\admin\\Dropbox\\Prop Book\\EquityUpdation.csv"
+        EU = pd.read_csv(EUdf)
+       
+        #Function for total option check..for each order of option and their trigger orders
+       
+        Accesstokenfile="C:\\Users\\admin\\Dropbox\\Prop Book\\Access token.txt"
+        with open(Accesstokenfile, "r") as f:
+                lines = f.readlines()
+              #  print(lines)
+                access_token=lines
+         
+        for x in access_token:
+             y=x
+        kite = KiteConnect('d3ou1os095rgpon3',y)   #connect kite
+           
+        Orders=kite.orders()
+        Orders=pd.DataFrame(Orders)
+        #print(Orders)
+        #Orders.to_csv('C:\\Users\\admin\\Dropbox\\Prop Book\\Zerodhaorders.csv')
+       
+        df=Orders.groupby(['tag'])
+        Optionsdf=pd.DataFrame(columns=['SystemTag','Symbol','Filled_qty','Price','Stoploss_qty','Stoploss_Price','Stoploss_percent','TriggerHit','TriggerCheck','High','status'])
+        todaydate = date.today()
+        i=0
+        for name,group in df:
+           
+            if name in ShortOptionsset:
+                tempdf=pd.DataFrame()
+                sldf=pd.DataFrame()
+                tempdf[['Tradingsymbol','Price','Filled_qty']]=group[((group['status']=="COMPLETE") & (group['transaction_type']=="SELL")) ][['tradingsymbol','average_price','filled_quantity']]
+                sldf[['Symbol','Price','Qty','Filled_qty','status']]=group[(group['transaction_type']=="BUY")][['tradingsymbol','trigger_price','quantity','filled_quantity','status']]
+                sldf=sldf.reset_index(drop=True)
+                newdf=tempdf.groupby(['Tradingsymbol'])  
+               
+                   
+                for name1,group1 in newdf:
+                    Optionsdf.loc[i,'SystemTag']=name
+                    Optionsdf.loc[i,'Symbol']=name1
+                    avgprice=(group1['Price']*group1['Filled_qty']).sum()/group1['Filled_qty'].sum()
+                    Optionsdf.loc[i,'Price']=avgprice
+                    Optionsdf.loc[i,'Filled_qty']=group1['Filled_qty'].sum()
+                    EUdf1=EU[EU['System']==name]
+                    EUdf1=EUdf1.reset_index()
+                    optionstime = datetime.datetime.now().strftime("%Y-%m-%d") + " " + EUdf1['Time'].at[0]
+                   
+       
+                    if name1[0:4] == "BANK":
+                        index = "BANKNIFTY"
+                        strike = name1[-7:]
+                        strike1 = strike[0:5]
+                        opttype = name1[-2:]
+                       
+                    else:
+                        index = "NIFTY50"
+                        strike = name1[-7:]
+                        strike1 = strike[0:5]
+                        opttype = name1[-2:]
+                    #IB get highest since entrytime
+                   
+                    contract = Contract(symbol=index,lastTradeDateOrContractMonth="20230209",strike=strike1,right=opttype,exchange='NSE', currency='INR',secType='OPT')
+                    await ib.qualifyContractsAsync(contract)
+                   
+                    historicaldata = await ib.reqHistoricalDataAsync(contract,endDateTime='',durationStr='1 D',
+                                         barSizeSetting='1 min', whatToShow='MIDPOINT', useRTH=False)
+                   
+                   
+                    historicaltable = util.df(historicaldata)
+                   
+                    #print(historicaltable)
+                    ht = historicaltable.set_index('date')
+                    historicaltable1 = ht.loc[optionstime:,"high"]
+                    historicaltable1df = pd.DataFrame(historicaltable1)
+                    high=historicaltable1df['high'].max()
+                    print(name,name1,"high:",high)
+                   
+                   
+                    length=sldf.shape[0]
+                    for k in range(0,length):
+                       
+                        if(Optionsdf.loc[i,'Symbol']==sldf.loc[k,'Symbol']):
+                            Optionsdf.loc[i,'Stoploss_qty']=sldf.loc[k,'Qty']
+                            Optionsdf.loc[i,'Stoploss_Price']=sldf.loc[k,'Price']
+                            stoplosscalculation=(sldf.loc[k,'Price']-avgprice)/avgprice*100
+                            Optionsdf.loc[i,'Stoploss_percent']=stoplosscalculation
+                            Optionsdf.loc[i,'High']=high                    
+                            Optionsdf.loc[i,'status']=sldf.loc[k,'status']
+                           
+                           
+                            if(sldf.loc[k,'status']=="COMPLETE") :
+                              Optionsdf.loc[i,'TriggerHit']=1
+                            else:
+                              Optionsdf.loc[i,'TriggerHit']=0
+                           
+                            if(high > sldf.loc[k,'Price'] and sldf.loc[k,'status']=="COMPLETE" ):
+                               
+                                Optionsdf.loc[i,'TriggerCheck']=1  
+                               
+                               
+                            elif(high > sldf.loc[k,'Price'] and sldf.loc[k,'status']!="COMPLETE"):
+                                Optionsdf.loc[i,'TriggerCheck']= -1
+                                playsound('C:/Windows/Media/Alarm02.wav')
+                                pymsgbox.alert("Check Stoploss: "+name1+ " High: "+str(high) + " Systemtag: "+name, 'Title')                        
+                           
+                            else:
+                                Optionsdf.loc[i,'TriggerCheck']=0
+                             
+                    i=i+1      
+           
+                   
+        clear_output(wait=True)
+        #print(Optionsdf[['SystemTag','Symbol','TriggerHit','TriggerCheck','High','status']])
+        display(Optionsdf[['SystemTag','Symbol','Stoploss_Price','TriggerHit','TriggerCheck','High','status']])
+       
+        a = Optionsdf[Optionsdf["status"]=="COMPLETE"].count()["status"]
+        print("The number of stoploss hit are: ")
+        print(a)
+       
+        now = datetime.datetime.now()
+        now = now.strftime("%I %M %p")
+       
+        z = now
+       
+        # Clearing the Screen
+       
+       
+        #time.sleep(1)
+        #await asyncio.sleep(1)
+        #c =+1
+
+def get_or_create_eventloop():
+    try:
+        return asyncio.get_event_loop()
+    except RuntimeError as ex:
+        if "There is no current event loop in thread" in str(ex):
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            return asyncio.get_event_loop()        
+
+nest_asyncio.apply()
+loop =get_or_create_eventloop()        #Banknifty with tws
+loop.run_until_complete(main())
