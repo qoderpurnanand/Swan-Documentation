@@ -1,3 +1,4 @@
+### Updated as of 31.01.2023
 ///Fin_nifty weekly expiry : Thursday was expiry until 14.10.2021 and from 19.10.2021(first) tuesday was the new expiry
 ///Fin_nifty weeklies started in Jan.2021
 
