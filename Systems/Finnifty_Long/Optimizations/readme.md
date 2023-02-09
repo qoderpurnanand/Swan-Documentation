@@ -4,9 +4,11 @@
 
 ###Introduction:
 
-Version 1:
+####Version 1:
 Max Positions: 2
+
 We ran backtests using different Input Values on all 3 Indices to combine them. Following are the different combinations:
+
 ![image](https://user-images.githubusercontent.com/67407393/217734517-255244fe-9327-4f53-9a79-6fd18294e307.png)
 
 The idea was to run these backtests for each of the Index and combine them.
