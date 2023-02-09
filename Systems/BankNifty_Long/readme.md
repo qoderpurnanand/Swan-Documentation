@@ -2,6 +2,12 @@
 Objective:  Since Banknifty is trend following we want to buy and hold Banknifty – But it makes sense to do the same thing using the Underlying Option, The risk to rewards are better since we have weekly options. So the underlying trend needs to be in the Index and based on that move we buy the underlying Option. 
 
 ### Optimization 2: 07.02.2023
+
+File Path: Maxpos 2: Systems/Finnifty_Long/Optimizations/All_long_options_Combined_Curves_pos_2.xlsx
+           Maxpos 1: Systems/Finnifty_Long/Optimizations/All_long_options_Combined_Curves_pos_1.1.xlsx
+           
+           
+           
 07.02.2023: Equity Curves Built for Banknifty: We backtested 8 curves with different times:
 
 ![image](https://user-images.githubusercontent.com/67407393/217749191-991842cf-84d6-48d4-a113-77da398b43bf.png)
