@@ -7,7 +7,7 @@
 
 
 
-####Version 1:
+#### Version 1:
 Max Positions: 2
 
 
@@ -21,12 +21,12 @@ Of these only the 20% gap system wasnt doing so well, because it was opening a l
 ![image](https://user-images.githubusercontent.com/67407393/217734810-06936af3-f590-410e-a372-86390cdff9b8.png)
 
 
-###Version 2:
+### Version 2:
 Max Positions: 1
 In this backtest instead of 20% gap we have taken 30% and instead of 2 positions 1.
 
+![image](https://user-images.githubusercontent.com/67407393/217741158-a7e13e5c-543c-4da5-90b5-b8f01782735c.png)
 
-![image](https://user-images.githubusercontent.com/67407393/217740775-79c808f0-49e7-4593-9285-fc10bcd98632.png)
 
 12 Systems * 1 Position = 12 Positions 
 
