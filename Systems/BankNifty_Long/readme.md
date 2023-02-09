@@ -1,6 +1,7 @@
 # BANKNIFTY LONG:
 Objective:  Since Banknifty is trend following we want to buy and hold Banknifty – But it makes sense to do the same thing using the Underlying Option, The risk to rewards are better since we have weekly options. So the underlying trend needs to be in the Index and based on that move we buy the underlying Option. 
 
+### Optimization 2: 07.02.2023
 07.02.2023: Equity Curves Built for Banknifty: We backtested 8 curves with different times:
 
 ![image](https://user-images.githubusercontent.com/67407393/217749191-991842cf-84d6-48d4-a113-77da398b43bf.png)
@@ -9,6 +10,8 @@ Objective:  Since Banknifty is trend following we want to buy and hold Banknifty
 ![image](https://user-images.githubusercontent.com/67407393/217749226-51c09f19-574d-43bf-9631-7e974a3f3ea9.png)
 
 //////07.02.2023 Testing ends here///////
+
+### Optimization 1: 
 
 ## Bankniftylong
 Banknifty Long system is an options trading strategy that buys Calls/Put Options as based on two Indicators:
