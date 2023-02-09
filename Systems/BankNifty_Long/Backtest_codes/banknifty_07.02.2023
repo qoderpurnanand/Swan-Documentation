@@ -1,0 +1,176 @@
+_SECTION_BEGIN("Price");  
+ 
+TimeFrameSet(inDaily); 
+#include <ExpiryDates.afl>   
+OptionExpiryDate = DateTimeConvert(2,WeeklyExpiryDate); 
+StartDate = DateTimeConvert(2,DateNum()); 
+DTE = round(DateTimeDiff(OptionExpiryDate,StartDate)/(3600*24)); 
+TimeFrameRestore(); 
+ 
+DaysToExpiry = TimeFrameExpand(DTE,inDaily,expandFirst); 
+currentexp = 1;
+
+if(currentexp ==0)
+{
+ NextExpirySym = IIf(StrRight(Name(),2)=="-I",1,0);
+
+StrikePrice1 = StrToNum(StrLeft(StrRight(Name(),7),5)); 
+StrikePrice2 = StrToNum(StrLeft(StrRight(Name(),9),5)); 
+StrikePrice  = IIf(NextExpirySym==0,StrikePrice1,StrikePrice2);   
+ 
+Type = WriteIf(nextexpirysym==1,StrLeft(StrRight(Name(),4),2),StrRight(Name(),2)); 
+}
+else
+{
+StrikePrice  = StrToNum(StrLeft(StrRight(Name(),7),5));   
+Type = StrRight(Name(),2); 
+NextExpirySym = IIf(StrRight(Name(),2)=="-I",1,0);
+
+} 
+ 
+BankNiftyClose = Foreign("$BANKNIFTY-NSE", "C" ); 
+CallATM = (round(BankNiftyClose/100)*100); 
+PutATM = (round(BankNiftyClose/100)*100); 
+ 
+OTMPf = 0; 
+ 
+CallOTM = round((CallATM + OTMPf)/100)*100; 
+PutOTM = round((PutATM - OTMPf)/100)*100; 
+ 
+Moneyness = 0; 
+ 
+CallSelection = IIf(Type == "CE" AND StrikePrice == CallOTM, 1 , 0); 
+PutSelection  = IIf(Type == "PE" AND StrikePrice == PutOTM, 1 , 0); 
+ 
+StrikePriceSelector = CallSelection OR PutSelection; 
+ 
+//#include <BankNifty Weekly StrikePriceSelector(CO).afl> 
+ 
+LotSize = IIf(Datenum()>=1110101 AND DateNum()<=1151029, 25 , IIf( DateNum()>=1151030 AND DateNum()<=1160630 , 30, IIf( DateNum()>=1160701 AND DateNum()<=1181025 , 40 , IIf( DateNum()>=1181026 AND DateNum()<=1200730 , 20 , 25)))) ;    
+ 
+Maxpos = Optimize("maxpos",1,3,8,2); 
+SetOption("initialEquity",10000000); 
+SetPositionSize(1/maxpos,spsPercentOfEquity); 
+SetOption("maxopenpositions",maxpos); 
+SetTradeDelays(0,0,0,0); 
+//SetOption("priceboundchecking",False); 
+SetOption("DisableRuinStop",True); 
+ 
+DiwaliDates = DateNum()!=1111026 AND DateNum()!=1121113 AND DateNum()!=1131103 AND DateNum()!=1141023 AND DateNum()!=1151111 AND DateNum()!=1161030 AND DateNum()!=1171019 AND DateNum()!=1181107 AND DateNum()!=1191027 AND DateNum()!=1201114 AND DateNum()!=1211104 AND DateNum()!=1221024; 
+/* 
+Cases = Optimize("Cases",0,0,22,1); 
+ 
+if(cases == 0){Entrytime = 093000;} 
+if(cases == 1){Entrytime = 094500;} 
+if(cases == 2){Entrytime = 100000;} 
+if(cases == 3){Entrytime = 101500;} 
+if(cases == 4){Entrytime = 103000;} 
+if(cases == 5){Entrytime = 104500;} 
+if(cases == 6){Entrytime = 110000;} 
+if(cases == 7){Entrytime = 111500;} 
+if(cases == 8){Entrytime = 113000;} 
+if(cases == 9){Entrytime = 114500;} 
+if(cases == 10){Entrytime = 120000;} 
+if(cases == 11){Entrytime = 121500;} 
+if(cases == 12){Entrytime = 123000;} 
+if(cases == 13){Entrytime = 124500;} 
+if(cases == 14){Entrytime = 130000;} 
+if(cases == 15){Entrytime = 131500;} 
+if(cases == 16){Entrytime = 133000;} 
+if(cases == 17){Entrytime = 134500;} 
+if(cases == 18){Entrytime = 140000;} 
+if(cases == 19){Entrytime = 141500;} 
+if(cases == 20){Entrytime = 143000;} 
+if(cases == 21){Entrytime = 144500;} 
+if(cases == 22){Entrytime = 150000;} 
+/*	 
+Cases1 = Optimize("Cases1",0,0,3,1); 
+ 
+if(cases1 == 0){NextDayExitTime = 091500;} 
+if(cases1 == 1){NextDayExitTime = 092000;} 
+if(cases1 == 2){NextDayExitTime = 092500;} 
+if(cases1 == 3){NextDayExitTime = 093000;} 
+*/ 
+ 
+Cases = Optimize("Cases",1,1,4,1); 
+ 
+if(cases == 1){EntryTime = 093000; Exittime =144500; Gapfilter = 30;gapcaln = Open;} 
+if(cases == 2){EntryTime = 103000; Exittime =150000; Gapfilter = 30;gapcaln = Close;} 
+if(cases == 3){EntryTime = 113000; Exittime =151000; Gapfilter = 40;gapcaln = Open;} 
+if(cases == 4){EntryTime = 123000; Exittime =152000; Gapfilter = 50;gapcaln = Close;} 
+if(cases == 5){EntryTime = 093000; Exittime =150000; Gapfilter = 20;gapcaln = Open;} 
+if(cases == 6){EntryTime = 103000; Exittime =150500; Gapfilter = 30;gapcaln = Close;} 
+if(cases == 7){EntryTime = 113000; Exittime =151000; Gapfilter = 40;gapcaln = Open;} 
+if(cases == 8){EntryTime = 123000; Exittime =151500; Gapfilter = 50;gapcaln = Close;} 
+ 
+addtime = 459; 
+ 
+EntryTime  = Entrytime+addtime;  
+ExitTime  =  IIf(DaysToExpiry==0,Exittime+addtime,153000+addtime); 
+NextDayExitTime  = 091500+addtime; 
+ 
+OpBar = ValueWhen(DateNum()!=Ref(DateNum(),-1),gapcaln);//Close 
+ 
+IntradayGap = (Close/OpBar-1)*100; 
+//GapFilter = 40;//Optimize("gapfilter",40,20,70,10); 
+GapCond = IntradayGap > GapFilter; 
+ 
+bi = BarIndex(); 
+exitlastbar = bi == LastValue(bi);     
+ 
+Entrypf = 0.1; 
+ 
+POI = Close; 
+edist = ATR(3); 
+ 
+Btrig = POI - (edist*entrypf); 
+ 
+Strig = POI + (Entrypf*edist); 
+/* 
+TimeFrameSet(inDaily); 
+#include <ExpiryDates.afl> 
+Daychange = Day() != Ref(Day(),-1); 
+Tom = Ref(DateNum(),1); 
+WeeklyExpiryDate = IIf(Ref(DateNum(),1) > WeeklyExpiryDate,DateNum(),WeeklyExpiryDate); 
+TimeFrameRestore(); 
+ 
+WeeklyExpiryDate = TimeFrameExpand(WeeklyExpiryDate,inDaily,expandFirst); 
+Daychange = TimeFrameExpand(Daychange,inDaily,expandFirst); 
+Tom = TimeFrameExpand(Tom,inDaily,expandFirst); 
+*/ 
+BuyCond = TimeNum()>=Entrytime AND TimeNum()<ExitTime AND StrikePriceSelector == 1  AND diwalidates AND GapCond; 
+ 
+TimeFrameSet(inDaily); 
+NextDay = Ref(DayOfWeek(),1); 
+TimeFrameRestore(); 
+ 
+NextDay = TimeFrameExpand(nextday,inDaily,expandFirst);  
+ 
+BuySys1 = BuyCond AND DateNum()!= 1170125 AND NextExpirySym==0; 
+BuySys2 = BuyCond AND IIf(DaysToExpiry==0,NextExpirySym==1,NextExpirySym==0) AND DateNum()!= 1170125;  
+ 
+Buy = IIf(currentexp==1,BuySys1,BuySys2);
+ 
+SellSys1 = IIf(DaystoExpiry==0 AND TimeNum()>=Exittime,TimeNum()>=Exittime ,TimeNum()==NextDayExitTime) OR IIf(DaystoExpiry==0 AND Day()!=Ref(Day(),1),1,0); 
+SellSys2 = IIf(DaystoExpiry==0 AND NextDay!=5 AND TimeNum()>=Exittime,TimeNum()>=Exittime,TimeNum()==NextDayExitTime); 
+ 
+Sell = IIf(currentexp==1,sellsys1,sellsys2);
+ 
+Buy = ExRem(Buy,Sell); 
+Sell = ExRem(Sell,Buy); 
+ 
+BuyPrice = Close; 
+SellPrice = Close;//IIf(Ref(H,1)>strig, Max(Ref(Open,1),strig),Ref(Close,1)); 
+ 
+PortEquity = Foreign("~~~EQUITY", "C" ); 
+ 
+Filter =1; 
+AddColumn(PortEquity,"PortEquity",1.4); 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
