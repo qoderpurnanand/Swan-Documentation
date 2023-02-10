@@ -1,0 +1,67 @@
+#include <BankniftymonthlyStrikePriceSelector_sql_format.afl>   
+ 
+ 
+ 
+Maxpos = Optimize("maxpos",2,2,8,2); 
+SetOption("initialEquity",10000000); 
+SetPositionSize(1/maxpos,spsPercentOfEquity); 
+SetOption("maxopenpositions",maxpos); 
+SetTradeDelays(0,0,0,0); 
+//SetOption("priceboundchecking",False); 
+SetOption("DisableRuinStop",True); 
+ 
+DiwaliDates = DateNum()!=1111026 AND DateNum()!=1121113 AND DateNum()!=1131103 AND DateNum()!=1141023 AND DateNum()!=1151111 AND DateNum()!=1161030 AND DateNum()!=1171019 AND DateNum()!=1181107 AND DateNum()!=1191027 AND DateNum()!=1201114 AND DateNum()!=1211104 AND DateNum()!=1221024; 
+ 
+ 
+Cases = Optimize("Cases",1,1,4,1); 
+ 
+if(cases == 1){EntryTime = 093000; Exittime =144500; Gapfilter = 30;gapcaln = Close; nextdayexittime = 091500;} 
+if(cases == 2){EntryTime = 103000; Exittime =150000; Gapfilter = 30;gapcaln = Close;nextdayexittime = 092000;} 
+if(cases == 3){EntryTime = 113000; Exittime =151000; Gapfilter = 40;gapcaln = Open;nextdayexittime = 092500;} 
+if(cases == 4){EntryTime = 123000; Exittime =152000; Gapfilter = 50;gapcaln = Close;nextdayexittime = 093000;} 
+if(cases == 5){EntryTime = 093000; Exittime =150000; Gapfilter = 20;gapcaln = Open;} 
+if(cases == 6){EntryTime = 103000; Exittime =150500; Gapfilter = 30;gapcaln = Close;} 
+if(cases == 7){EntryTime = 113000; Exittime =151000; Gapfilter = 40;gapcaln = Open;} 
+if(cases == 8){EntryTime = 123000; Exittime =151500; Gapfilter = 50;gapcaln = Close;} 
+ 
+addtime = 459; 
+ 
+EntryTime  = Entrytime+addtime;  
+ExitTime  =  IIf(DaysToExpiry==0,Exittime+addtime,153000+addtime); 
+NextDayExitTime  = nextdayexittime+addtime; 
+ 
+OpBar = ValueWhen(DateNum()!=Ref(DateNum(),-1),gapcaln);//Close 
+ 
+IntradayGap = (Close/OpBar-1)*100; 
+//GapFilter = 40;//Optimize("gapfilter",40,20,70,10); 
+GapCond = IntradayGap > IIf(nextexpirysym==1,10,GapFilter); 
+ 
+BuyCond = TimeNum()>=Entrytime AND TimeNum()<ExitTime AND StrikePriceSelector == 1  AND diwalidates AND GapCond; 
+ 
+TimeFrameSet(inDaily); 
+NextDay = Ref(DayOfWeek(),1); 
+TimeFrameRestore(); 
+ 
+NextDay = TimeFrameExpand(nextday,inDaily,expandFirst);  
+ 
+BuySys1 = BuyCond AND DateNum()!= 1170125 AND NextExpirySym==0 ; 
+BuySys2 = BuyCond AND IIf(DaysToExpiry<=7,NextExpirySym==1,NextExpirySym==0) AND DateNum()!= 1170125;  
+ 
+Buy = BuySys2; 
+ 
+SellSys1 = IIf(DaystoExpiry==0 AND TimeNum()>=Exittime,TimeNum()>=Exittime ,TimeNum()==NextDayExitTime) OR IIf(DaystoExpiry==0 AND Day()!=Ref(Day(),1),1,0); 
+SellSys2 = IIf(DaystoExpiry<=4  AND TimeNum()>=Exittime,TimeNum()>=Exittime,TimeNum()==NextDayExitTime); 
+ 
+Sell = SellSys2; 
+ 
+Buy = ExRem(Buy,Sell); 
+Sell = ExRem(Sell,Buy); 
+ 
+BuyPrice = Close; 
+SellPrice = Close; 
+ 
+Filter =1; 
+AddColumn(daystoexpiry,"daystoexpiry");
+AddColumn( strikepriceselector,"strikepriceselector");
+AddColumn(Buy,"Buy");
+AddColumn(IntradayGap,"gap");
