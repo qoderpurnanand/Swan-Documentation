@@ -122,7 +122,9 @@
     Datenum()==1220929 OR 
     Datenum()==1221027 OR 
     Datenum()==1221124 OR 
-    Datenum()==1221229  );
+    Datenum()==1221229 OR
+    Datenum()==1230125 OR
+    Datenum()==1230223  );
     }
 
     sym = Strright(Name(),  4 );
