@@ -1,4 +1,3 @@
-
 if(Name() == "20MICRONS.EQ-NSE"){includeok = Datenum() >=1130717 AND Datenum() < 1130927;}
 if(Name() == "3IINFOTECH.EQ-NSE"){includeok = (Datenum() >=1091222 AND Datenum() < 1120928) OR (Datenum()>=1130621 AND Datenum() < 1130927);}
 if(Name() == "3MINDIA.EQ-NSE"){includeok = Datenum() >=1090202;}
@@ -379,7 +378,7 @@ if(Name() == "IFBIND.EQ-NSE"){includeok = (Datenum() >=1150327 and Datenum() < 1
 if(Name() == "IFCI.EQ-NSE"){includeok = Datenum() >=1091022 AND Datenum() < 1200925;}
 if(Name() == "IGARASHI.EQ-NSE"){includeok = Datenum() >=1160401 AND Datenum() < 1180402;}
 if(Name() == "IIFL.EQ-NSE"){includeok = (Datenum() >=1090202 and Datenum() < 1170623) OR (Datenum()>=1180402 AND Datenum() < 1181228) OR (Datenum()>=1190927);}
-if(Name() == "IIFLWAM.EQ-NSE"){includeok = Datenum() >=1200626;}
+if(Name() == "IIFLWAM.EQ-NSE"){includeok = Datenum() >=1200626 AND Datenum() < 1230120;}
 if(Name() == "IL_FSENGG.EQ-NSE"){includeok = (Datenum() >=1110518 AND Datenum() < 1150327) OR (Datenum()>=1150928 AND Datenum() < 1160401);}
 if(Name() == "IL_FSTRANS.EQ-NSE"){includeok = Datenum() >=1130401 AND Datenum() < 1190329;}
 if(Name() == "INDIACEM.EQ-NSE"){includeok = Datenum() >=1090202;}
@@ -1001,4 +1000,5 @@ if(Name() == "OLECTRA.EQ-NSE"){includeok = Datenum() >=1220930;}
 if(Name() == "OLECTRA.EQ-NSE"){includeok = Datenum() >=1221230;}
 if(Name() == "SHRIRAMFIN.EQ-NSE"){includeok = Datenum() >=1221220;}
 if(Name() == "LTIM.EQ-NSE"){includeok = Datenum() >=1221205;}
+if(Name() == "360ONE.EQ-NSE"){includeok = Datenum() >=1230120;}
 
