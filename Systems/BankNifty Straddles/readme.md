@@ -43,6 +43,7 @@ Data used:
 ### 7. Reverse Monthly Straddles (Long) with adjustments
 ### 8. Leverage Optimisation 2,4,6,8,10,15
 - We chose 6x Leverage
+### 9. Squaring off Current Monthly Long and Opening Monthly-II long in the final week of current Month
 
 ## Trigger Logic
 - Trigger % Range 25-200
