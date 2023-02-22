@@ -18,14 +18,14 @@ Data used:
 ### 1. Delta Optimisations
   - Optimised for 5-50 delta
   - No trend was seen, 30 and 40 delta had the best results.
-  - We chose a range of 15-50 delta.
+  - We chose a range of 15-50 delta, as it did not diminish the results and it made sense to be covered against most market movement.
 ### 2. SL and Profit Target optimisation
-- Based on % of premium Collected or lost.
+- Based on percent of premium Collected or lost.
 - These did not add any value to the system.
 ### 3. Opening Day optimisations
 #### - Weekly - Optimised for opening on Thursday, Friday, Monday, Tuesday and Wednesday; all squaring off on Expiry.
 -  - Monday and Tuesday opening had the best results; Thursday had the poorest results.
--  - We chose to open a combination of Monday,Tuesday and Wednesday opening day.
+-  - We chose to open a combination of Monday,Tuesday and Wednesday opening day as Thursday increased the drawdowns.
 #### - Monthly - Optimised for opening on Friday,Monday; all squaring off on Expiry
 -   - Opening on Monday had similar returns but reduced the Drawdown. 
 ### 4. Adjustments - Delta
@@ -40,10 +40,17 @@ Data used:
 - These are performed for Weekly SHORT
 
 ### 6. Short Monthly Straddles
-### 7. Reverse Monthly Straddles (Long) with adjustments
+- We tested Shorting both CE and PE on current month contracts.
+- This system had negative results.
+### 7. Reverse Monthly Straddles Base case and with adjustments
+- Here, we went long on Monthly CE and PE instead of short.
+- For adjustments, we tested both Delta Based and premium neutral adjustments. We decided to go with Delta based adjustments as it perfomed slightly better and since we are going long, we havent missed out on any premium.
 ### 8. Leverage Optimisation 2,4,6,8,10,15
 - We chose 6x Leverage
-### 9. Squaring off Current Monthly Long and Opening Monthly-II long in the final week of current Month
+### 9. Opening Monthly Long every week.
+- Here, we tested opening monthly long CE and PE every Friday and squared them off on weekly expiry.
+### 10. Squaring off Current Monthly Long and Opening Monthly-II long in the final week of current Month.
+- Here, in the final week of the month, to prevent the chance of going long and short on the same strike, we tested squaring off the current expiry on the before the final week began and went long on Next Month contracts on the First day of the final month.
 
 ## Trigger Logic
 - Trigger % Range 25-200
