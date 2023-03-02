@@ -33,8 +33,8 @@ Data used:
 - These are performed for Monthly LONG
 ### 5. Adjustments - Premium Neutral
 - Squaring off the existing position when underlying(BankNifty) crosses the trigger on either side and opening Strikes worth the same premium, on the same day. 
-- For example, we square off a straddle at a total premium of 100,
-- We Short a CALL strike going at a premium closest to 50 (100/2),
+- For example, we open a straddle aving a total premium of 200 and after the trigger is hit, we square it off at a total premium of 100,
+- While adjusting, we Short a CALL strike going at a premium closest to 50 (100/2),
 - Similarly, We Short a PUT strike going at a premium closest to 50 (100/2).
 - The idea is to collect the premium missed out on when shifting.
 - These are performed for Weekly SHORT
@@ -45,8 +45,9 @@ Data used:
 ### 7. Reverse Monthly Straddles Base case and with adjustments
 - Here, we went long on Monthly CE and PE instead of short.
 - For adjustments, we tested both Delta Based and premium neutral adjustments. We decided to go with Delta based adjustments as it perfomed slightly better and since we are going long, we havent missed out on any premium.
-### 8. Leverage Optimisation 2,4,6,8,10,15
-- We chose 6x Leverage
+### 8. Leverage Optimisation 
+- Optimisation were performed on a leverage of 4,6,8,10,12,15.
+- We chose 12x Leverage.
 ### 9. Opening Monthly Long every week.
 - Here, we tested opening monthly long CE and PE every Friday and squared them off on weekly expiry.
 ### 10. Squaring off Current Monthly Long and Opening Monthly-II long in the final week of current Month.
@@ -54,13 +55,18 @@ Data used:
 
 ## Trigger Logic
 - Trigger % Range 25-200
-- Upper Trigger = (Total Premium)*trigger% + CE Strike
-- Lower Trigger = PE Strike - (Total Premium)*trigger%
+- Upper Trigger = (Total Premium)*Trigger% + CE Strike
+- Lower Trigger = PE Strike - (Total Premium)*Trigger%
 
 
 ## Position Sizing
 1. Minimum Premium
+- 
+
+
 2. Number of Shares
+- Here, the available equity is multiplied with the leverage to get the Total available margin. We then divide this margin with the underlying equity value and then by 2 (for CE and PE) to get the margin required to open 1 unit. The total number of units are then calculated by dividing the available margin by margin required to open 1 unit.
+
 
 Both were tried with and without compounding, 
 Number of shares performed better.
