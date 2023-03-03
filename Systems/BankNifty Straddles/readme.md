@@ -65,10 +65,6 @@ Data used:
 - Lower Trigger = PE Strike - (Total Premium)*Trigger%
 
 
-df.loc[idi,'ratio']=df.loc[idi,'Min_premium']*poe*100/df.loc[idi,'Total_Premium']
-                                    df.loc[idi , 'units_new'] = (((df.loc[idi ,'pl_check'])*df.loc[idi,'ratio'])/(df.loc[idi,  "OPT_Close_CE"]+df.loc[idi,  "OPT_Close_PE"])/2)
-
-
 
 ## Position Sizing
 1. Minimum Premium
