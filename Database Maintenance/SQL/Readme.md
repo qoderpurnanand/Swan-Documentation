@@ -13,7 +13,11 @@ This repository contains the codes for creating Continuous Contracts for BankNif
 4. In case of any errors, we can use the [Deletion Code](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/SQL/Deletion_Code_UserInput.ipynb) to delete a entry for a particular date (date here is an input).
 
 ## CODE TO FETCH DATA FROM SQL
-
-The below code is used to fetch data from SQL, which would contain user inputs such as - Index, Schema, Date Range, Timeframe<br/>
+BEFORE RUNNING THIS CODE, MAKE SURE ALL THE LIBRARIES OF PYTHON ARE INSTALLED.
+   <br/>Required libraries - <br/>
+      ***pyspark***<br/>
+      ***tqdm***<br/>
+      ***psycopg2***<br/>
+<br/>The below code is used to fetch data from SQL, which would contain user inputs such as - Index, Schema, Date Range, Timeframe<br/>
 [Fetch Data](https://github.com/qodeinvestments/Swan-Documentation/blob/main/Database%20Maintenance/SQL/Fetch_data_without_tqdm.py)
 
