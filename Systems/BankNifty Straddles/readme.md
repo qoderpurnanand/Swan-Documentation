@@ -1,5 +1,9 @@
 # BankNifty Straddles
 
+
+
+03.03.2023:
+
 BankNifty Straddles is an option strategy which runs on weekly and monthly timeframes.
 In the weekly part of this system, 
 - Current week CE & PE contracts are short depending on the delta.
