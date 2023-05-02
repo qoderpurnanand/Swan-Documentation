@@ -1,0 +1,31 @@
+_SECTION_BEGIN("Expiry Thursday for Indian markets");
+//Expiry Thursday for Indian markets
+
+function monthexpiry()
+{
+TimeFrameSet(inDaily);
+Daysinmonth=IIf(Month()==1 OR Month()==3 OR Month()==5 OR Month()==7 OR Month()==8 OR Month()==10 OR Month()==12,31,30);
+Daysinmonthfeb=IIf(Year()%4 == 0 AND Year()%100!=0,29,28);
+Daysinmonthfinal=IIf(Month()==2,Daysinmonthfeb,Daysinmonth);
+weeklyexpiry = DayOfWeek() == 4 OR (DayOfWeek() < 4 AND Ref(DayOfWeek(),1) > 4) OR (DayOfWeek() < 4 AND Ref(DayOfWeek(),1) <= DayOfWeek());
+lastdayofmonth = ValueWhen(Month()!=Ref(Month(),1),dayofweek(),0);
+mindays = IIf(lastdayofmonth!=4,8,7);
+daydifference = (Daysinmonthfinal-Day());
+
+returnvalue=IIf( daydifference < mindays AND weeklyexpiry ,1,0);
+count = sumsince(month()!=Ref(Month(),-1),returnvalue);///this will make sure that no double counting of expiries are happening
+returnvalue=IIf( daydifference < mindays AND weeklyexpiry AND count==1,1,0);
+TimeFrameRestore();
+returnvalue = TimeFrameExpand(returnvalue,inDaily,expandFirst);
+return returnvalue;
+
+}
+
+
+TimeFrameSet(inDaily);
+
+weeklyexpiry = DayOfWeek() == 4 OR (DayOfWeek() < 4 AND Ref(DayOfWeek(),1) > 4) OR (DayOfWeek() < 4 AND Ref(DayOfWeek(),1) <= DayOfWeek());
+TimeFrameRestore();
+
+weeklyexpiry = TimeFrameExpand(weeklyexpiry,inDaily,expandFirst);
+monthlyexpiry = IIf(monthexpiry(),1,0);
