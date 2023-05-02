@@ -6,4 +6,4 @@ We have filtered the following conditions :
 2. Removed all the indexes from the data.
 3. Kept companies from 2004 onwards only to analyse their data from previous years (2001-2003).
 
-the final DataFrameis then exported, named as : "Final_Universe.csv"
+the final DataFrame is then exported, named as : "Final_Universe.csv" and used in futher files.
