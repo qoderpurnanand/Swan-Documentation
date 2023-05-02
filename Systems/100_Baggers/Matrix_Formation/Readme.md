@@ -12,5 +12,5 @@
 5. Calculating a Matrix to store the company names according to their Bagger Values and Year wise.
 6. Creating another Matrix to store company count according to their Bagger Values and Year wise.
 
-the DataFrame is then exported, named as : "Bagger.csv"which is used in further files.
-the final DataFrame is then exported, named as : "**count.csv**".
+The DataFrame is then exported, named as : "Bagger.csv"which is used in further files.</br>
+The final DataFrame is then exported, named as : "**count.csv**".
